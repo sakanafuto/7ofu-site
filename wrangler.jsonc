@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers（Static Assets）で Astro のビルド出力(dist)を配信する設定。
+  // ビルド: npm run build → dist/ を生成 / デプロイ: npx wrangler deploy
+  "name": "7ofu-site",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
