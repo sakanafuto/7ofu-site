@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="送信しました | こうら日記" description="お問い合わせを送信しました">
+  <section class="intro">
+    <p class="crumb">
+      <a href="/">Home</a> / <a href="/koura-diary">こうら日記</a> / 送信完了
+    </p>
+    <h1>
+      <img src="/koura-diary.svg" alt="" width="36" height="36" />
+      送信しました
+    </h1>
+    <p>
+      お問い合わせありがとうございます。内容を確認のうえ、必要に応じてご連絡します。
+      テスター応募の場合は、準備が整い次第いただいたメールアドレス宛にご案内します。
+    </p>
+    <p><a class="back" href="/koura-diary">← こうら日記のページに戻る</a></p>
+  </section>
+
+  <style>
+    .intro { margin-bottom: 1rem; }
+    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+    h1 { display: flex; align-items: center; gap: 0.6rem; }
+    .back { color: var(--brand); }
+  </style>
+</BaseLayout>
