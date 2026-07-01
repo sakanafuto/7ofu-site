@@ -1,0 +1,101 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = '7ofu の個人サイト' } = Astro.props;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/koura-diary/', label: 'こうら日記' },
+];
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <!-- Lism CSS（デザインフレームワーク・#75）。デザイントークン/タイポグラフィのベース。 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lism-css@0/dist/css/main.css"
+    />
+    <style is:global>
+      :root {
+        --site-max: 44rem;
+        --brand: #41592d;
+        --bg: #fbf7ee;
+        --fg: #2c2c2c;
+        --muted: #6b6b6b;
+        --line: #e6e0d3;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family:
+          system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+        line-height: 1.8;
+      }
+      .container {
+        max-width: var(--site-max);
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+      }
+      .site-header {
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 80%, white);
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(6px);
+      }
+      .site-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 3.5rem;
+      }
+      .brand {
+        font-weight: 700;
+        color: var(--brand);
+        text-decoration: none;
+        font-size: 1.05rem;
+      }
+      .site-nav { display: flex; gap: 1.25rem; }
+      .site-nav a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
+      .site-nav a:hover { color: var(--brand); }
+      main { padding-block: 2.5rem 4rem; }
+      .site-footer {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .site-footer .container { padding-block: 1.5rem; }
+      a { color: var(--brand); }
+      h1 { font-size: 1.7rem; line-height: 1.4; }
+      h2 { font-size: 1.25rem; margin-top: 2.25rem; border-left: 4px solid var(--brand); padding-left: 0.6rem; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="/" class="brand">🐢 7ofu</a>
+        <nav class="site-nav">
+          {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">© 2026 7ofu</div>
+    </footer>
+  </body>
+</html>

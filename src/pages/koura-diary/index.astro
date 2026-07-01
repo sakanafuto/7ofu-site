@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const docs = [
+  { href: '/koura-diary/terms', title: '利用規約', desc: 'アプリの利用条件' },
+  { href: '/koura-diary/privacy', title: 'プライバシーポリシー', desc: '情報の取扱い' },
+  { href: '/koura-diary/disclaimer', title: '免責事項', desc: '健康・栄養表示について' },
+];
+---
+
+<BaseLayout title="こうら日記 | 7ofu" description="こうら日記のヘルプ・規約">
+  <section class="intro">
+    <p class="crumb"><a href="/">Home</a> / こうら日記</p>
+    <h1>🐢 こうら日記</h1>
+    <p class="lead">リクガメの毎日を、やさしく記録する飼育日記アプリ。</p>
+  </section>
+
+  <section>
+    <h2>規約・ポリシー</h2>
+    <ul class="doclist">
+      {docs.map((d) => (
+        <li>
+          <a href={d.href}>
+            <strong>{d.title}</strong>
+            <small>{d.desc}</small>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <style>
+    .crumb { font-size: 0.85rem; color: var(--muted); }
+    .lead { color: var(--muted); }
+    .doclist { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+    .doclist a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      text-decoration: none;
+      color: var(--fg);
+    }
+    .doclist a:hover { border-color: var(--brand); }
+    .doclist small { color: var(--muted); }
+  </style>
+</BaseLayout>

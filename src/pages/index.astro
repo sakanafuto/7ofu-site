@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="7ofu">
+  <section class="hero">
+    <h1>7ofu</h1>
+    <p class="lead">
+      アプリを作っています。ここは作ったものと、そのヘルプ・規約を置く場所です。
+    </p>
+  </section>
+
+  <section>
+    <h2>つくったもの</h2>
+    <ul class="cards">
+      <li class="card">
+        <a href="/koura-diary/">
+          <span class="card-emoji">🐢</span>
+          <span class="card-body">
+            <strong>こうら日記</strong>
+            <small>リクガメの飼育記録アプリ。規約・プライバシー・免責はこちら。</small>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <style>
+    .hero { padding-block: 1rem 2rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; }
+    .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+    .card a {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: var(--fg);
+    }
+    .card:hover { border-color: var(--brand); }
+    .card-emoji { font-size: 1.8rem; }
+    .card-body { display: flex; flex-direction: column; gap: 0.15rem; }
+    .card-body small { color: var(--muted); }
+  </style>
+</BaseLayout>
