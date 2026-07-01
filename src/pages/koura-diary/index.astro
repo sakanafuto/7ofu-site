@@ -5,6 +5,9 @@ const docs = [
   { href: '/koura-diary/privacy', title: 'プライバシーポリシー', desc: '情報の取扱い' },
   { href: '/koura-diary/disclaimer', title: '免責事項', desc: '健康・栄養表示について' },
 ];
+// 応募・要望は当面 Notion の問い合わせフォームに集約（アプリの AppLinks.contactFormUrl と同一）。
+const contactForm =
+  'https://10tofu01.notion.site/d63ffea6baa78297bd8f815dbaf7e52f?pvs=105';
 ---
 
 <BaseLayout title="こうら日記 | 7ofu" description="こうら日記のヘルプ・規約">
@@ -15,6 +18,37 @@ const docs = [
       こうら日記
     </h1>
     <p class="lead">リクガメの毎日を、やさしく記録する飼育日記アプリ。</p>
+  </section>
+
+  <section>
+    <h2>ダウンロード</h2>
+    <div class="stores">
+      <div class="store">
+        <span class="store__os">iOS</span>
+        <strong class="store__state">まもなく公開</strong>
+        <small>App Store で審査中です。公開まで少しお待ちください。</small>
+      </div>
+      <div class="store store--wip">
+        <span class="store__os">Android</span>
+        <strong class="store__state">🚧 開発中</strong>
+        <small>Google Play 版を準備しています。</small>
+      </div>
+    </div>
+    <div class="recruit">
+      <p>
+        <strong>Android 版のテスターを募集しています。</strong>
+        Google Play の公開にはテスターの協力（クローズドテスト）が必要です。
+        ご協力いただける方は、ぜひひとことお寄せください。
+      </p>
+      <div class="recruit__actions">
+        <a class="btn btn--primary" href={contactForm} target="_blank" rel="noopener">
+          テスターに応募する
+        </a>
+        <a class="btn" href={contactForm} target="_blank" rel="noopener">
+          Android 版がほしいと要望を送る
+        </a>
+      </div>
+    </div>
   </section>
 
   <section>
@@ -69,5 +103,60 @@ const docs = [
     }
     .doclist a:hover { border-color: var(--brand); }
     .doclist small { color: var(--muted); }
+
+    .stores {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 480px) {
+      .stores { grid-template-columns: 1fr; }
+    }
+    .store {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+    .store--wip { background: #f7f4ec; }
+    .store__os {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .store__state { font-size: 1.05rem; }
+    .store small { color: var(--muted); }
+
+    .recruit {
+      margin-top: 1.25rem;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--brand);
+      border-radius: 14px;
+      background: #fbfaf5;
+    }
+    .recruit p { margin: 0 0 0.95rem; line-height: 1.75; }
+    .recruit__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.1rem;
+      border-radius: 10px;
+      border: 1px solid var(--brand);
+      color: var(--brand);
+      background: white;
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { background: var(--brand); color: white; }
+    .btn--primary { background: var(--brand); color: white; }
+    .btn--primary:hover { opacity: 0.88; }
   </style>
 </BaseLayout>
