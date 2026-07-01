@@ -44,7 +44,7 @@ const nav = [
       .container {
         max-width: var(--site-max);
         margin-inline: auto;
-        padding-inline: 1.25rem;
+        padding-inline: 1.5rem;
       }
       .site-header {
         border-bottom: 1px solid var(--line);
@@ -68,7 +68,8 @@ const nav = [
       .site-nav { display: flex; gap: 1.25rem; }
       .site-nav a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
       .site-nav a:hover { color: var(--brand); }
-      main { padding-block: 2.5rem 4rem; }
+      main { padding-block: 4rem 6rem; }
+      p { margin-block: 1.1rem; }
       .site-footer {
         border-top: 1px solid var(--line);
         color: var(--muted);
@@ -76,14 +77,20 @@ const nav = [
       }
       .site-footer .container { padding-block: 1.5rem; }
       a { color: var(--brand); }
-      h1 { font-size: 1.7rem; line-height: 1.4; }
-      h2 { font-size: 1.25rem; margin-top: 2.25rem; border-left: 4px solid var(--brand); padding-left: 0.6rem; }
+      h1 { font-size: 1.7rem; line-height: 1.45; margin: 0 0 1rem; }
+      h2 {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        margin: 3.25rem 0 1.5rem;
+        border-left: 4px solid var(--brand);
+        padding-left: 0.7rem;
+      }
     </style>
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <a href="/" class="brand">🐢 7ofu</a>
+        <a href="/" class="brand">7ofu</a>
         <nav class="site-nav">
           {nav.map((n) => <a href={n.href}>{n.label}</a>)}
         </nav>

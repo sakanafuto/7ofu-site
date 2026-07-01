@@ -15,7 +15,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <ul class="cards">
       <li class="card">
         <a href="/koura-diary/">
-          <span class="card-emoji">🐢</span>
+          <img src="/koura-diary.svg" alt="" class="card-icon" width="48" height="48" />
           <span class="card-body">
             <strong>こうら日記</strong>
             <small>リクガメの飼育記録アプリ。規約・プライバシー・免責はこちら。</small>
@@ -26,25 +26,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <style>
-    .hero { padding-block: 1rem 2rem; }
+    .hero { padding-block: 1rem 2.5rem; }
     .lead { color: var(--muted); font-size: 1.05rem; }
     .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
     .card {
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 16px;
       background: white;
+      transition: border-color 0.15s ease;
     }
     .card a {
       display: flex;
-      gap: 1rem;
+      gap: 1.15rem;
       align-items: center;
-      padding: 1rem 1.25rem;
+      padding: 1.35rem 1.5rem;
       text-decoration: none;
       color: var(--fg);
     }
     .card:hover { border-color: var(--brand); }
-    .card-emoji { font-size: 1.8rem; }
-    .card-body { display: flex; flex-direction: column; gap: 0.15rem; }
+    .card-icon { flex: none; }
+    .card-body { display: flex; flex-direction: column; gap: 0.25rem; }
     .card-body small { color: var(--muted); }
   </style>
 </BaseLayout>

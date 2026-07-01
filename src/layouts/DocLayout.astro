@@ -2,23 +2,39 @@
 // .md ページの frontmatter から `layout: ../../layouts/DocLayout.astro` で使う。
 import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
+// YAML の日付は Date になりうるので YYYY-MM-DD に整形。
+const updated = frontmatter.updated
+  ? String(frontmatter.updated).slice(0, 10)
+  : null;
 ---
 
-<BaseLayout title={`${frontmatter.title} | こうら日記`} description={frontmatter.title}>
+<BaseLayout
+  title={`${frontmatter.title} | こうら日記`}
+  description={frontmatter.title}
+>
   <article class="doc">
     <p class="crumb"><a href="/koura-diary/">こうら日記</a> / {frontmatter.title}</p>
     <h1>{frontmatter.title}</h1>
-    {frontmatter.updated && <p class="updated">最終更新: {frontmatter.updated}</p>}
-    <slot />
+    {updated && <p class="updated">最終更新: {updated}</p>}
+    <div class="body"><slot /></div>
     <p class="back"><a href="/koura-diary/">← こうら日記トップにもどる</a></p>
   </article>
   <style>
     .doc { max-width: 40rem; }
-    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .updated { color: var(--muted); font-size: 0.85rem; margin-top: -0.5rem; }
-    .doc :global(ol),
-    .doc :global(ul) { padding-left: 1.4rem; }
-    .doc :global(li) { margin-block: 0.35rem; }
-    .back { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.9rem; }
+    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+    .updated {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: -0.5rem 0 2.75rem;
+    }
+    .body :global(ol),
+    .body :global(ul) { padding-left: 1.4rem; }
+    .body :global(li) { margin-block: 0.5rem; }
+    .back {
+      margin-top: 4rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
   </style>
 </BaseLayout>
