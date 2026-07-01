@@ -5,9 +5,9 @@ const docs = [
   { href: '/koura-diary/privacy', title: 'プライバシーポリシー', desc: '情報の取扱い' },
   { href: '/koura-diary/disclaimer', title: '免責事項', desc: '健康・栄養表示について' },
 ];
-// 応募・要望は当面 Notion の問い合わせフォームに集約（アプリの AppLinks.contactFormUrl と同一）。
+// 応募・要望は当面 Notion の問い合わせフォームに集約（?pvs= トラッキングは付けない）。
 const contactForm =
-  'https://10tofu01.notion.site/d63ffea6baa78297bd8f815dbaf7e52f?pvs=105';
+  'https://10tofu01.notion.site/d63ffea6baa78297bd8f815dbaf7e52f';
 ---
 
 <BaseLayout title="こうら日記 | 7ofu" description="こうら日記のヘルプ・規約">
@@ -48,6 +48,10 @@ const contactForm =
           Android 版がほしいと要望を送る
         </a>
       </div>
+      <p class="recruit__note">
+        ※ お申し込み後すぐにテストを開始できるわけではありません。準備が整い次第、
+        いただいたメールアドレス宛に個別でご案内させていただく場合があります。
+      </p>
     </div>
   </section>
 
@@ -139,6 +143,12 @@ const contactForm =
       background: #fbfaf5;
     }
     .recruit p { margin: 0 0 0.95rem; line-height: 1.75; }
+    .recruit__note {
+      margin: 0.95rem 0 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
     .recruit__actions {
       display: flex;
       flex-wrap: wrap;
