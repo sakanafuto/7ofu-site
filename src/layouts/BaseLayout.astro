@@ -1,24 +1,43 @@
 ---
+import {
+  getLangFromUrl,
+  useTranslations,
+  localizePath,
+  alternatePath,
+  languageName,
+} from '../i18n/ui';
+
 export interface Props {
   title: string;
   description?: string;
 }
-const { title, description = '7ofu の個人サイト' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { title, description = t('meta.siteDescription') } = Astro.props;
+
 const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/koura-diary/', label: 'こうら日記' },
-  { href: '/linkmint/', label: 'LinkMint' },
+  { href: localizePath('/', lang), label: t('nav.home') },
+  { href: localizePath('/koura-diary/', lang), label: t('nav.koura') },
+  { href: localizePath('/schemely/', lang), label: t('nav.schemely') },
 ];
+const otherLang = lang === 'ja' ? 'en' : 'ja';
+const switchHref = alternatePath(Astro.url.pathname, otherLang);
+// hreflang 用の絶対 URL（Astro.site = https://7ofu.dev）。
+const jaHref = new URL(alternatePath(Astro.url.pathname, 'ja'), Astro.site).href;
+const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" hreflang="ja" href={jaHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="x-default" href={jaHref} />
     <title>{title}</title>
     <!-- Lism CSS（デザインフレームワーク・#75）。デザイントークン/タイポグラフィのベース。 -->
     <link
@@ -75,6 +94,14 @@ const nav = [
       }
       .site-nav a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
       .site-nav a:hover { color: var(--brand); }
+      .lang-switch {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.1rem 0.7rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .lang-switch:hover { border-color: var(--brand); color: var(--brand); }
       main { padding-block: 4rem 6rem; }
       p { margin-block: 1.1rem; }
       .site-footer {
@@ -97,9 +124,17 @@ const nav = [
   <body>
     <header class="site-header">
       <div class="container">
-        <a href="/" class="brand">7ofu</a>
+        <a href={localizePath('/', lang)} class="brand">7ofu</a>
         <nav class="site-nav">
           {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+          <a
+            class="lang-switch"
+            href={switchHref}
+            hreflang={otherLang}
+            rel="alternate"
+          >
+            {languageName[otherLang]}
+          </a>
         </nav>
       </div>
     </header>

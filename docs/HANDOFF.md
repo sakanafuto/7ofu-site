@@ -1,21 +1,21 @@
 # HANDOFF（最終更新: 2026-07-06）
 
 ## 現在地
-- ブランチ: chore/harness-setup ／ リモート: `github.com/sakanafuto/7ofu-site`
-- Open PR: **#2 ハーネス導入** ／ **#3 LinkMint ページ**（どちらもレビュー・マージ待ち）
+- ブランチ: feat/i18n-en ／ リモート: `github.com/sakanafuto/7ofu-site`
+- PR #5 = 「英語対応(i18n) ＋ Schemely 改名」。ユーザーレビュー（特に法務英訳）→ マージ待ち
 
 ## 直前に完了したこと
-- ハーネス（CLAUDE.md / docs 状態ファイル / .claude hooks + skills / .githooks）を
-  tortoise_log・deeptap から移植・導入（PR #2）
-- LinkMint ページ一式＋サイト導線＋DocLayout の app/hub 化（PR #3）。残は Issue #1
+- 英語対応（i18n・ja ルート + /en/・全ページ en 版・言語スイッチャ・hreflang）
+- アプリ改名追従: slug `/linkmint/`→`/schemely/`（ja/en）・`public/schemely.svg`・全ブランド置換・
+  フォーム subject/from_name/redirect 更新・`public/_redirects`（旧 URL 301）。build 26 ページ green
 
 ## 次のアクション
-- ユーザーが PR #3 → #2 の順でレビュー・マージ（マージはユーザー）
-- マージ後、ユーザーが `npx wrangler deploy` で本番反映
-- LinkMint iOS 公開に合わせ `index.astro` の「準備中」バッジと導線を差し替え
+- PR #5 レビュー（法務英訳）→ マージ → ユーザーが `npx wrangler deploy` で本番反映
+- デプロイ後、In-App リンク（`7ofu.dev/schemely/...`）と旧 `/linkmint/*` の 301 を実地確認
+- 残: Issue #1（Schemely 紹介文の機能追記）
 
 ## ブロッカー・注意点
-- main 直コミットは hook でブロック。作業はブランチ → PR
-- `.claude/hooks`・`.claude/skills`・`.claude/settings.json` はサンドボックス保護 → 編集はサンドボックス無効で
-- `git push` / `gh` はキーチェーン検証でサンドボックスに弾かれる → サンドボックス無効で実行
-- 安全 hook は本文/コード中の「wrangler deploy」文字列にも反応する → PR 本文等は `--body-file` で渡す
+- `git grep 'LinkMint|linkmint'` の残留は意図的な 2 箇所のみ: adr/0005（旧名の記録）と `public/_redirects`
+- Web3Forms 公開キーは `.gitleaks.toml` で許可済（contact ページ編集時も pre-commit が通る）
+- 新ページは ja/en 両方作る。main 直コミットは hook でブロック。`.git`/`gh`/push はサンドボックス無効で
+- 安全 hook は「wrangler deploy」文字列に反応 → PR 本文は `--body-file` で渡す

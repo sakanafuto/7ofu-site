@@ -1,0 +1,12 @@
+# gitleaks 設定。既定ルールに加え、誤検知を許可リストで除外する。
+# Web3Forms の access key はクライアント埋め込み前提の「公開キー」（秘密情報ではない・adr/0002）。
+# ja 問い合わせフォームに以前からコミット済みで、en 版でも同じ値を使う。ビルド後の HTML にも
+# そのまま出る性質のもの。ここで許可しないと contact ページを触るたび pre-commit が止まる。
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Web3Forms public access key (client-embedded, not a secret; see docs/adr/0002)"
+regexes = [
+  '''4d53d18b-45ea-4a8b-b261-fbf883ace717''',
+]
