@@ -2,6 +2,9 @@
 // .md ページの frontmatter から `layout: ../../layouts/DocLayout.astro` で使う。
 import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
+// アプリ名とハブへのパス。frontmatter で上書き可（未指定はこうら日記＝従来の既定）。
+const app = frontmatter.app ?? 'こうら日記';
+const hub = frontmatter.hub ?? '/koura-diary/';
 // YAML の日付は Date になりうるので YYYY-MM-DD に整形。
 const updated = frontmatter.updated
   ? String(frontmatter.updated).slice(0, 10)
@@ -9,15 +12,15 @@ const updated = frontmatter.updated
 ---
 
 <BaseLayout
-  title={`${frontmatter.title} | こうら日記`}
+  title={`${frontmatter.title} | ${app}`}
   description={frontmatter.title}
 >
   <article class="doc">
-    <p class="crumb"><a href="/koura-diary/">こうら日記</a> / {frontmatter.title}</p>
+    <p class="crumb"><a href={hub}>{app}</a> / {frontmatter.title}</p>
     <h1>{frontmatter.title}</h1>
     {updated && <p class="updated">最終更新: {updated}</p>}
     <div class="body"><slot /></div>
-    <p class="back"><a href="/koura-diary/">← こうら日記トップにもどる</a></p>
+    <p class="back"><a href={hub}>← {app}トップにもどる</a></p>
   </article>
   <style>
     .doc { max-width: 40rem; }

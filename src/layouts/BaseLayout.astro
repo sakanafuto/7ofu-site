@@ -7,6 +7,7 @@ const { title, description = '7ofu の個人サイト' } = Astro.props;
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/koura-diary/', label: 'こうら日記' },
+  { href: '/linkmint/', label: 'LinkMint' },
 ];
 ---
 
@@ -66,7 +67,12 @@ const nav = [
         text-decoration: none;
         font-size: 1.05rem;
       }
-      .site-nav { display: flex; gap: 1.25rem; }
+      .site-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.5rem 1.25rem;
+      }
       .site-nav a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
       .site-nav a:hover { color: var(--brand); }
       main { padding-block: 4rem 6rem; }

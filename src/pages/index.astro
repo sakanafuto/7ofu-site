@@ -22,6 +22,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </span>
         </a>
       </li>
+      <li class="card">
+        <a href="/linkmint/">
+          <img src="/linkmint.svg" alt="" class="card-icon" width="48" height="48" />
+          <span class="card-body">
+            <strong>LinkMint <span class="badge">準備中</span></strong>
+            <small>Deep Link（URL スキーム / Universal Link）の挙動を確かめる検証ツール。規約・プライバシーはこちら。</small>
+          </span>
+        </a>
+      </li>
     </ul>
   </section>
 
@@ -44,8 +53,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       color: var(--fg);
     }
     .card:hover { border-color: var(--brand); }
-    .card-icon { flex: none; }
+    .card-icon { flex: none; border-radius: 11px; }
     .card-body { display: flex; flex-direction: column; gap: 0.25rem; }
     .card-body small { color: var(--muted); }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: #f0ebdd;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+      vertical-align: middle;
+      margin-left: 0.35rem;
+    }
   </style>
 </BaseLayout>
