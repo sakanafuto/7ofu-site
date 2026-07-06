@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Sent | Koura Diary" description="Your message has been sent">
+  <section class="intro">
+    <p class="crumb">
+      <a href="/en/">Home</a> / <a href="/en/koura-diary">Koura Diary</a> / Sent
+    </p>
+    <h1>
+      <img src="/koura-diary.svg" alt="" width="36" height="36" />
+      Message sent
+    </h1>
+    <p>
+      Thanks for reaching out. I'll review your message and get back to you if needed.
+      For tester applications, I'll contact you at the email address you provided once things are ready.
+    </p>
+    <p><a class="back" href="/en/koura-diary">← Back to Koura Diary</a></p>
+  </section>
+
+  <style>
+    .intro { margin-bottom: 1rem; }
+    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+    h1 { display: flex; align-items: center; gap: 0.6rem; }
+    .back { color: var(--brand); }
+  </style>
+</BaseLayout>

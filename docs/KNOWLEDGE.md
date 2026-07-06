@@ -20,8 +20,23 @@
   リンクが差し替わる。未指定はこうら日記（後方互換）。→ adr/0003
 - ストアカードのグリッドは `repeat(auto-fit, minmax(...))`。カード 1 枚（iOS 単体）でも
   半分に寄らず安定幅で表示される（`repeat(2, 1fr)` だと 1 枚時に崩れる）。
-- ビルドは速い（全 13 ページで ~1s）。**テストは無く、`astro build` が事実上の回帰ゲート**
+- ビルドは速い（ja+en 全 26 ページで ~1s）。**テストは無く、`astro build` が事実上の回帰ゲート**
   （壊れた import・frontmatter 不備・テンプレート崩れを検出）。
+
+## 多言語化（i18n・adr/0004）
+
+- Astro ネイティブ i18n。ja がルート（`/linkmint/terms`）、en が `/en/` 配下（`/en/linkmint/terms`）。
+  `astro.config.mjs` の `i18n.routing.prefixDefaultLocale:false`。
+- locale 判定は `src/i18n/ui.ts` の `getLangFromUrl(Astro.url)`（`/en/*` → en、他 → ja）。
+  `Astro.currentLocale` でも取れるが URL 基準で明示している。
+- **共有レイアウト（BaseLayout / DocLayout）だけが両 locale を 1 ファイルで描画**し、辞書 `ui` で
+  nav・doc 定型文を切替。ランディング・規約の本文は locale 別ページ（`src/pages/en/**`）に持つ。
+- 言語スイッチャ／hreflang は `alternatePath(pathname, lang)` で対になる URL を生成（`/en` 接頭辞の
+  付け外し・末尾スラッシュ込みで解決）。**新ページは ja/en 両方作る**（片方欠けるとスイッチャが 404）。
+- 問い合わせフォームは共通化せず en を新規作成（稼働中 ja フォームを触らない）。en は件名に `(EN)`、
+  redirect を `/en/<app>/thanks`。option の value は英語だが `name="種別"` は ja と揃えて通知を統一。
+- ビルド HTML の `<!-- Lism CSS（デザイン…） -->` 開発コメントは全 locale に残る（不可視・無害）。
+  かな検出で引っかかるのはこれで、本文の翻訳漏れではない。
 
 ## Cloudflare Workers（Static Assets）
 

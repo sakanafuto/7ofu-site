@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="7ofu">
+  <section class="hero">
+    <h1>7ofu</h1>
+    <p class="lead">
+      I make apps. This is where I keep them, along with their help and legal pages.
+    </p>
+  </section>
+
+  <section>
+    <h2>What I've made</h2>
+    <ul class="cards">
+      <li class="card">
+        <a href="/en/koura-diary/">
+          <img src="/koura-diary.svg" alt="" class="card-icon" width="48" height="48" />
+          <span class="card-body">
+            <strong>Koura Diary</strong>
+            <small>A care-log app for tortoises. Terms, privacy, and disclaimer here.</small>
+          </span>
+        </a>
+      </li>
+      <li class="card">
+        <a href="/en/linkmint/">
+          <img src="/linkmint.svg" alt="" class="card-icon" width="48" height="48" />
+          <span class="card-body">
+            <strong>LinkMint <span class="badge">Coming soon</span></strong>
+            <small>A tool to test how deep links (URL schemes / Universal Links) behave. Terms and privacy here.</small>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <style>
+    .hero { padding-block: 1rem 2.5rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; }
+    .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+      transition: border-color 0.15s ease;
+    }
+    .card a {
+      display: flex;
+      gap: 1.15rem;
+      align-items: center;
+      padding: 1.35rem 1.5rem;
+      text-decoration: none;
+      color: var(--fg);
+    }
+    .card:hover { border-color: var(--brand); }
+    .card-icon { flex: none; border-radius: 11px; }
+    .card-body { display: flex; flex-direction: column; gap: 0.25rem; }
+    .card-body small { color: var(--muted); }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: #f0ebdd;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+      vertical-align: middle;
+      margin-left: 0.35rem;
+    }
+  </style>
+</BaseLayout>

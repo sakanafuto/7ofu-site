@@ -1,7 +1,10 @@
 ---
 // .md ページの frontmatter から `layout: ../../layouts/DocLayout.astro` で使う。
 import BaseLayout from './BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/ui';
 const { frontmatter } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 // アプリ名とハブへのパス。frontmatter で上書き可（未指定はこうら日記＝従来の既定）。
 const app = frontmatter.app ?? 'こうら日記';
 const hub = frontmatter.hub ?? '/koura-diary/';
@@ -18,9 +21,11 @@ const updated = frontmatter.updated
   <article class="doc">
     <p class="crumb"><a href={hub}>{app}</a> / {frontmatter.title}</p>
     <h1>{frontmatter.title}</h1>
-    {updated && <p class="updated">最終更新: {updated}</p>}
+    {updated && <p class="updated">{t('doc.updated')} {updated}</p>}
     <div class="body"><slot /></div>
-    <p class="back"><a href={hub}>← {app}トップにもどる</a></p>
+    <p class="back">
+      <a href={hub}>{t('doc.back').replace('{app}', app)}</a>
+    </p>
   </article>
   <style>
     .doc { max-width: 40rem; }

@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const docs = [
+  { href: '/en/koura-diary/terms', title: 'Terms of Use', desc: 'Conditions for using the app' },
+  { href: '/en/koura-diary/privacy', title: 'Privacy Policy', desc: 'How your information is handled' },
+  { href: '/en/koura-diary/disclaimer', title: 'Disclaimer', desc: 'About health and nutrition information' },
+];
+---
+
+<BaseLayout title="Koura Diary | 7ofu" description="Koura Diary help and legal pages">
+  <section class="intro">
+    <p class="crumb"><a href="/en/">Home</a> / Koura Diary</p>
+    <h1 class="title">
+      <img src="/koura-diary.svg" alt="" width="40" height="40" />
+      Koura Diary
+    </h1>
+    <p class="lead">A gentle daily care-log app for your tortoise.</p>
+  </section>
+
+  <section>
+    <h2>Download</h2>
+    <div class="stores">
+      <a
+        class="store store--live"
+        href="https://apps.apple.com/app/id6783813983"
+        target="_blank"
+        rel="noopener"
+      >
+        <span class="store__os">iOS</span>
+        <strong class="store__state">Get it on the App Store ↗</strong>
+        <small>For iPhone / iPad.</small>
+      </a>
+      <div class="store store--wip">
+        <span class="store__os">Android</span>
+        <strong class="store__state">🚧 In development</strong>
+        <small>The Google Play version is in preparation.</small>
+      </div>
+    </div>
+    <div class="recruit">
+      <p>
+        <strong>We're looking for testers for the Android version.</strong>
+        Publishing on Google Play requires tester participation (closed testing).
+        If you'd like to help, please drop us a line.
+      </p>
+      <div class="recruit__actions">
+        <a class="btn btn--primary" href="/en/koura-diary/contact?type=tester">
+          Apply as a tester
+        </a>
+        <a class="btn" href="/en/koura-diary/contact?type=request">
+          Request the Android version
+        </a>
+      </div>
+      <p class="recruit__note">
+        Note: Applying does not start testing immediately. Once things are ready,
+        we may contact you individually at the email address you provide.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>How to use</h2>
+    <ul class="doclist">
+      <li>
+        <a href="/en/koura-diary/help">
+          <strong>How to use / Help</strong>
+          <small>Recording, family sharing, backup, and more</small>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Terms &amp; Policies</h2>
+    <ul class="doclist">
+      {docs.map((d) => (
+        <li>
+          <a href={d.href}>
+            <strong>{d.title}</strong>
+            <small>{d.desc}</small>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <style>
+    .intro { margin-bottom: 1rem; }
+    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+    .title { display: flex; align-items: center; gap: 0.65rem; }
+    .lead { color: var(--muted); }
+    .doclist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .doclist a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1.15rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.15s ease;
+    }
+    .doclist a:hover { border-color: var(--brand); }
+    .doclist small { color: var(--muted); }
+
+    .stores {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 480px) {
+      .stores { grid-template-columns: 1fr; }
+    }
+    .store {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+    .store--wip { background: #f7f4ec; }
+    a.store {
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease;
+    }
+    a.store:hover { border-color: var(--brand); }
+    .store--live { border-color: var(--brand); }
+    .store__os {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .store__state { font-size: 1.05rem; }
+    .store small { color: var(--muted); }
+
+    .recruit {
+      margin-top: 1.25rem;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--brand);
+      border-radius: 14px;
+      background: #fbfaf5;
+    }
+    .recruit p { margin: 0 0 0.95rem; line-height: 1.75; }
+    .recruit__note {
+      margin: 0.95rem 0 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .recruit__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.1rem;
+      border-radius: 10px;
+      border: 1px solid var(--brand);
+      color: var(--brand);
+      background: white;
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { background: var(--brand); color: white; }
+    .btn--primary { background: var(--brand); color: white; }
+    .btn--primary:hover { opacity: 0.88; }
+  </style>
+</BaseLayout>
