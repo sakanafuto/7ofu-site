@@ -10,7 +10,7 @@
 | F1 | Home（つくったもの一覧） | `/` | ✅ |
 | F2 | 共通レイアウト（BaseLayout / DocLayout） | `src/layouts/` | ✅ |
 | F3 | こうら日記 ランディング＋規約一式 | `/koura-diary/*` | ✅（iOS 公開済み） |
-| F4 | LinkMint ランディング＋規約一式 | `/linkmint/*` | 🚧（iOS 準備中） |
+| F4 | Schemely ランディング＋規約一式 | `/schemely/*` | 🚧（iOS 準備中） |
 | F5 | 問い合わせフォーム（Web3Forms） | `/<app>/contact` | ✅ |
 | F6 | 英語対応（i18n・ja ルート + /en/） | `/en/**` | ✅ |
 
@@ -29,7 +29,7 @@
   プライバシー／免責事項／問い合わせ／サンクス。
 - 受入: App Store リンクが有効。規約 3 種が DocLayout で表示される。
 
-## F4 LinkMint（Deep Link 検証ツール・deeptap）
+## F4 Schemely（Deep Link 検証ツール・deeptap）
 - ランディング（iOS 準備中表記）／利用規約／プライバシー／問い合わせ／サンクス。
 - 規約・プライバシーは実アプリ機能（QR 生成・写真保存・Buy Me a Coffee 応援）と整合。
 - 受入: iOS 公開時に「準備中」→ App Store 導線へ差し替えられる構成。

@@ -1,14 +1,14 @@
 ---
 layout: ../../../layouts/DocLayout.astro
 title: Privacy Policy
-app: LinkMint
-hub: /en/linkmint/
+app: Schemely
+hub: /en/schemely/
 updated: 2026-07-06
 ---
 
-> This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/linkmint/privacy) prevails.
+> This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/schemely/privacy) prevails.
 
-This policy describes how user information is handled in "LinkMint" (the "App").
+This policy describes how user information is handled in "Schemely" (the "App").
 
 ## 1. Information We Collect
 
@@ -42,4 +42,4 @@ This policy may be revised without prior notice. Revised content takes effect on
 
 ## 7. Contact
 
-For questions about this policy, please use the [contact form](/en/linkmint/contact).
+For questions about this policy, please use the [contact form](/en/schemely/contact).

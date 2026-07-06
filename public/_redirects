@@ -1,0 +1,7 @@
+# 旧アプリ名 LinkMint → Schemely の改名に伴う旧 URL リダイレクト（adr/0005）。
+# Cloudflare Workers Static Assets は dist/_redirects を解釈する（public/ → dist/ に配置）。
+# 既に配布済みの旧リンク・被リンク・検索インデックスを新 slug へ 301 で寄せる。
+/linkmint         /schemely/            301
+/linkmint/*       /schemely/:splat      301
+/en/linkmint      /en/schemely/         301
+/en/linkmint/*    /en/schemely/:splat   301

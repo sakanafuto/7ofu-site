@@ -9,6 +9,7 @@
 | [0002](0002-contact-form.md) | 問い合わせ基盤（Web3Forms・Turnstile 不採用） | Accepted |
 | [0003](0003-doclayout-multi-app.md) | DocLayout をアプリ横断で再利用（app/hub frontmatter） | Accepted |
 | [0004](0004-i18n-en.md) | サイトの英語対応（i18n・ja ルート + /en/） | Accepted |
+| [0005](0005-rename-linkmint-to-schemely.md) | アプリ改名に追従してサイトを LinkMint → Schemely に改名 | Accepted |
 
 ## フォーマット
 

@@ -1,14 +1,14 @@
 ---
 layout: ../../../layouts/DocLayout.astro
 title: Terms of Use
-app: LinkMint
-hub: /en/linkmint/
+app: Schemely
+hub: /en/schemely/
 updated: 2026-07-06
 ---
 
-> This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/linkmint/terms) prevails.
+> This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/schemely/terms) prevails.
 
-These Terms of Use (the "Terms") set out the conditions for using "LinkMint" (the "App"). By using the App, the user is deemed to have agreed to these Terms.
+These Terms of Use (the "Terms") set out the conditions for using "Schemely" (the "App"). By using the App, the user is deemed to have agreed to these Terms.
 
 ## 1. Application
 
@@ -45,4 +45,4 @@ These Terms may be revised without prior notice. Revised Terms take effect once 
 
 ## 8. Contact
 
-For questions about these Terms, please use the [contact form](/en/linkmint/contact).
+For questions about these Terms, please use the [contact form](/en/schemely/contact).

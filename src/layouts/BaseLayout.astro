@@ -18,7 +18,7 @@ const { title, description = t('meta.siteDescription') } = Astro.props;
 const nav = [
   { href: localizePath('/', lang), label: t('nav.home') },
   { href: localizePath('/koura-diary/', lang), label: t('nav.koura') },
-  { href: localizePath('/linkmint/', lang), label: t('nav.linkmint') },
+  { href: localizePath('/schemely/', lang), label: t('nav.schemely') },
 ];
 const otherLang = lang === 'ja' ? 'en' : 'ja';
 const switchHref = alternatePath(Astro.url.pathname, otherLang);

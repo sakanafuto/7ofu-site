@@ -12,10 +12,10 @@ export const languageName: Record<Lang, string> = {
   en: 'English',
 };
 
-/** アプリ表示名（locale 別）。ブランド LinkMint は共通。 */
+/** アプリ表示名（locale 別）。ブランド Schemely は共通。 */
 export const appName = {
   koura: { ja: 'こうら日記', en: 'Koura Diary' },
-  linkmint: { ja: 'LinkMint', en: 'LinkMint' },
+  schemely: { ja: 'Schemely', en: 'Schemely' },
 } as const;
 
 // 共有レイアウト（BaseLayout / DocLayout）が両 locale を 1 ファイルから描画するための最小辞書。
@@ -25,7 +25,7 @@ export const ui = {
   ja: {
     'nav.home': 'Home',
     'nav.koura': 'こうら日記',
-    'nav.linkmint': 'LinkMint',
+    'nav.schemely': 'Schemely',
     'meta.siteDescription': '7ofu の個人サイト',
     'doc.updated': '最終更新:',
     'doc.back': '← {app}トップにもどる',
@@ -33,7 +33,7 @@ export const ui = {
   en: {
     'nav.home': 'Home',
     'nav.koura': 'Koura Diary',
-    'nav.linkmint': 'LinkMint',
+    'nav.schemely': 'Schemely',
     'meta.siteDescription': "7ofu's personal site",
     'doc.updated': 'Last updated:',
     'doc.back': '← Back to {app}',
@@ -63,7 +63,7 @@ function toBasePath(pathname: string): string {
 }
 
 /**
- * ja 基準のパス（例 '/linkmint/terms'）を指定 locale の実パスに変換する。
+ * ja 基準のパス（例 '/schemely/terms'）を指定 locale の実パスに変換する。
  * ja はそのまま、en は '/en' を前置（ルートは '/en/'）。
  */
 export function localizePath(basePath: string, lang: Lang): string {

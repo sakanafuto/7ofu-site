@@ -1,29 +1,29 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// Web3Forms access key（クライアント埋め込み前提の公開キー・秘密情報ではない）。
-// ja フォームと同じ宛先に届く。件名に (EN) を付けて英語フォーム由来を判別できるようにする。
+// Web3Forms のアクセスキー（クライアント埋め込み前提の公開キー・秘密情報ではない）。
+// こうら日記と同じ宛先に届く。分けたい場合は Schemely 用のキーに差し替える。
 const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
 ---
 
 <BaseLayout
-  title="Contact | LinkMint"
-  description="Contact, requests, and bug reports for LinkMint"
+  title="お問い合わせ | Schemely"
+  description="Schemely へのお問い合わせ・要望・不具合報告"
 >
   <section class="intro">
     <p class="crumb">
-      <a href="/en/">Home</a> / <a href="/en/linkmint">LinkMint</a> / Contact
+      <a href="/">Home</a> / <a href="/schemely">Schemely</a> / お問い合わせ
     </p>
-    <h1>Contact</h1>
-    <p class="lead">Requests, bug reports, and anything else — feel free to reach out.</p>
+    <h1>お問い合わせ</h1>
+    <p class="lead">ご要望・不具合の報告など、お気軽にどうぞ。</p>
   </section>
 
   <form class="form" action="https://api.web3forms.com/submit" method="POST">
     <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-    <input type="hidden" name="subject" value="LinkMint お問い合わせ (EN)" />
-    <input type="hidden" name="from_name" value="LinkMint site (EN)" />
-    <input type="hidden" name="redirect" value="https://7ofu.dev/en/linkmint/thanks" />
-    {/* Honeypot for spam (invisible to humans) */}
+    <input type="hidden" name="subject" value="Schemely お問い合わせ" />
+    <input type="hidden" name="from_name" value="Schemely サイト" />
+    <input type="hidden" name="redirect" value="https://7ofu.dev/schemely/thanks" />
+    {/* スパム対策のハニーポット（人には見えない） */}
     <input
       type="checkbox"
       name="botcheck"
@@ -33,21 +33,21 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     />
 
     <label>
-      <span>Category</span>
+      <span>種別</span>
       <select name="種別" required>
-        <option value="Request">Request</option>
-        <option value="Bug report">Bug report</option>
-        <option value="Other">Other</option>
+        <option value="要望・リクエスト">要望・リクエスト</option>
+        <option value="不具合報告">不具合の報告</option>
+        <option value="その他">その他のお問い合わせ</option>
       </select>
     </label>
 
     <label>
-      <span>Name (optional)</span>
+      <span>お名前（任意）</span>
       <input type="text" name="name" autocomplete="name" />
     </label>
 
     <label>
-      <span>Email address</span>
+      <span>メールアドレス</span>
       <input
         type="email"
         name="email"
@@ -55,21 +55,21 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
         autocomplete="email"
         placeholder="you@example.com"
       />
-      <small>Used as the reply address if a response is needed.</small>
+      <small>返信が必要な場合の宛先に使用します。</small>
     </label>
 
     <label>
-      <span>Message</span>
+      <span>内容</span>
       <textarea
         name="message"
         rows="6"
         required
-        placeholder="Please describe your request or question."></textarea>
+        placeholder="ご要望・お問い合わせ内容をご記入ください。"></textarea>
     </label>
 
-    <button type="submit" class="btn btn--primary">Send</button>
+    <button type="submit" class="btn btn--primary">送信する</button>
     <p class="note">
-      Your message is delivered to the developer by email. Your email address is used only to reply.
+      送信内容は運営者にメールで届きます。いただいたメールアドレスは、返信の目的にのみ使用します。
     </p>
   </form>
 

@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://7ofu.dev',
   // 多言語化（adr/0004）。日本語を主（ルート維持）、英語を /en/ 配下に置く。
-  // prefixDefaultLocale:false ＝ ja は /linkmint/terms のまま、en は /en/linkmint/terms。
+  // prefixDefaultLocale:false ＝ ja は /schemely/terms のまま、en は /en/schemely/terms。
   i18n: {
     defaultLocale: 'ja',
     locales: ['ja', 'en'],

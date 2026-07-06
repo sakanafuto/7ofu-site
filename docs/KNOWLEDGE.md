@@ -6,7 +6,7 @@
   有料要素ではない）。届かない時はまず**迷惑メールフォルダ**を疑う（2026-07-06 実際にここだった）。
 - 無料枠は**月 250 件**まで。超えると届かなくなる。
 - access key はクライアント埋め込み前提の**公開キー**（秘密情報ではない・gitleaks 対象外でよい）。
-  こうら日記と LinkMint は同一キーを共用 → 同じ受信箱に届く。`subject` / `from_name` で判別。
+  こうら日記と Schemely は同一キーを共用 → 同じ受信箱に届く。`subject` / `from_name` で判別。
   宛先を分けたいときは Web3Forms でアプリ別キーを発行して差し替える。
 - **Turnstile（CAPTCHA）は無料枠が検証非対応**のため不採用（commit 44c35af で撤去）。
   スパム対策はハニーポット `botcheck`（人には見えない checkbox）で代替。→ adr/0002
@@ -14,7 +14,7 @@
 ## Astro / ルーティング
 
 - `.md` ページは `src/pages/<app>/terms.md` → `/<app>/terms/index.html` にビルドされる。
-  リンクは末尾スラッシュなし（`/linkmint/terms`）で書いており、Astro 既定の `trailingSlash: 'ignore'`
+  リンクは末尾スラッシュなし（`/schemely/terms`）で書いており、Astro 既定の `trailingSlash: 'ignore'`
   で解決される（koura-diary と同方式）。
 - **DocLayout の再利用**: `.md` の frontmatter に `app` / `hub` を足すとパンくず・タイトル・戻り
   リンクが差し替わる。未指定はこうら日記（後方互換）。→ adr/0003
@@ -25,7 +25,7 @@
 
 ## 多言語化（i18n・adr/0004）
 
-- Astro ネイティブ i18n。ja がルート（`/linkmint/terms`）、en が `/en/` 配下（`/en/linkmint/terms`）。
+- Astro ネイティブ i18n。ja がルート（`/schemely/terms`）、en が `/en/` 配下（`/en/schemely/terms`）。
   `astro.config.mjs` の `i18n.routing.prefixDefaultLocale:false`。
 - locale 判定は `src/i18n/ui.ts` の `getLangFromUrl(Astro.url)`（`/en/*` → en、他 → ja）。
   `Astro.currentLocale` でも取れるが URL 基準で明示している。
