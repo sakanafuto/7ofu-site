@@ -10,3 +10,7 @@ node_modules/
 # misc
 .DS_Store
 npm-debug.log*
+# claude code（ローカル設定・内部作業ディレクトリはコミットしない）
+.claude/settings.local.json
+.claude/.cc-writes/
+.wrangler/

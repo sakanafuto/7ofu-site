@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# pre-commit: gitleaks で staged 変更にシークレット漏洩がないかスキャンする。
+#
+# 有効化（clone 後 1 回だけ実行）:
+#   git config core.hooksPath .githooks
+# 一時的に skip:
+#   git commit --no-verify
+
+set -e
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "❌ gitleaks がインストールされていません。"
+  echo "   インストール: brew install gitleaks"
+  echo "   一時的に skip: git commit --no-verify"
+  exit 1
+fi
+
+echo "🔍 gitleaks: staged 変更をスキャン中..."
+gitleaks git --staged --redact --no-banner --verbose
