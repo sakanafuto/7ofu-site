@@ -1,0 +1,12 @@
+#!/bin/sh
+# push 前に astro build が通ることをローカルで確認する（テストは無いのでビルドが回帰ゲート）。
+# 緊急時は `git push --no-verify` で回避できる（多用しないこと）。
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+echo "▶ pre-push: npm run build（astro build）..."
+npm run build >/dev/null
+
+echo "✓ pre-push: build OK"
