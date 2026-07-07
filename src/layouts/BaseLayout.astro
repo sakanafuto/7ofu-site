@@ -4,7 +4,8 @@ import {
   useTranslations,
   localizePath,
   alternatePath,
-  languageName,
+  languageShort,
+  switchLangLabel,
 } from '../i18n/ui';
 
 export interface Props {
@@ -77,7 +78,7 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
       .site-header .container {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 0.6rem 1.25rem;
         min-height: 3.5rem;
       }
       .brand {
@@ -85,23 +86,54 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         color: var(--brand);
         text-decoration: none;
         font-size: 1.05rem;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
       .site-nav {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 0.5rem 1.25rem;
+        align-items: center;
+        gap: 1.25rem;
+        margin-inline-start: auto;
       }
-      .site-nav a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
+      .site-nav a {
+        color: var(--fg);
+        text-decoration: none;
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
       .site-nav a:hover { color: var(--brand); }
       .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
         border: 1px solid var(--line);
         border-radius: 999px;
-        padding: 0.1rem 0.7rem;
+        padding: 0.2rem 0.65rem;
         font-size: 0.82rem;
         color: var(--muted);
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
+      .lang-switch__icon { opacity: 0.85; }
       .lang-switch:hover { border-color: var(--brand); color: var(--brand); }
+
+      /* モバイルは 2 段ヘッダー: 1 段目=ロゴ+言語トグル / 2 段目=nav をセンタリング。 */
+      @media (max-width: 40rem) {
+        .site-header .container {
+          flex-wrap: wrap;
+          padding-block: 0.55rem;
+          min-height: 0;
+        }
+        .site-nav {
+          order: 1;
+          flex-basis: 100%;
+          justify-content: center;
+          gap: 1.5rem;
+          margin-inline-start: 0;
+        }
+        .lang-switch { margin-inline-start: auto; }
+      }
       main { padding-block: 4rem 6rem; }
       p { margin-block: 1.1rem; }
       .site-footer {
@@ -127,15 +159,30 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         <a href={localizePath('/', lang)} class="brand">7ofu</a>
         <nav class="site-nav">
           {nav.map((n) => <a href={n.href}>{n.label}</a>)}
-          <a
-            class="lang-switch"
-            href={switchHref}
-            hreflang={otherLang}
-            rel="alternate"
-          >
-            {languageName[otherLang]}
-          </a>
         </nav>
+        <a
+          class="lang-switch"
+          href={switchHref}
+          hreflang={otherLang}
+          rel="alternate"
+          aria-label={switchLangLabel[lang]}
+        >
+          <svg
+            class="lang-switch__icon"
+            viewBox="0 0 24 24"
+            width="1em"
+            height="1em"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18" />
+            <path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z" />
+          </svg>
+          <span>{languageShort[otherLang]}</span>
+        </a>
       </div>
     </header>
     <main>
