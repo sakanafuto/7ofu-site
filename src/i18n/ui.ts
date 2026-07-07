@@ -12,6 +12,18 @@ export const languageName: Record<Lang, string> = {
   en: 'English',
 };
 
+/** 言語スイッチャのピルに出す短い呼称（アイコン併用でコンパクトに）。各言語の自称で表記。 */
+export const languageShort: Record<Lang, string> = {
+  ja: '日本語',
+  en: 'EN',
+};
+
+/** 言語スイッチャの aria-label（現在の言語で「他方に切り替える」旨を表す）。 */
+export const switchLangLabel: Record<Lang, string> = {
+  ja: '英語に切り替える',
+  en: 'Switch to Japanese',
+};
+
 /** アプリ表示名（locale 別）。ブランド Schemely は共通。 */
 export const appName = {
   koura: { ja: 'こうら日記', en: 'Koura Diary' },
