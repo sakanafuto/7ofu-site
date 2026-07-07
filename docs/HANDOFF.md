@@ -1,18 +1,17 @@
-# HANDOFF（最終更新: 2026-07-06）
+# HANDOFF（最終更新: 2026-07-07）
 
 ## 現在地
-- ブランチ: feat/i18n-en ／ リモート: `github.com/sakanafuto/7ofu-site`
-- PR #5 = 「英語対応(i18n) ＋ Schemely 改名」。ユーザーレビュー（特に法務英訳）→ マージ待ち
+- ブランチ: main（同期済み）／ リモート: `github.com/sakanafuto/7ofu-site`
+- PR #5（i18n＋Schemely 改名）・PR #6（モバイルヘッダー修正）ともにマージ済み・本番デプロイ済み
 
 ## 直前に完了したこと
-- 英語対応（i18n・ja ルート + /en/・全ページ en 版・言語スイッチャ・hreflang）
-- アプリ改名追従: slug `/linkmint/`→`/schemely/`（ja/en）・`public/schemely.svg`・全ブランド置換・
-  フォーム subject/from_name/redirect 更新・`public/_redirects`（旧 URL 301）。build 26 ページ green
+- PR #6: スマホでヘッダーが崩れる問題を修正。ロゴ折り返し防止、モバイルは2段化
+  （1段目=ロゴ+言語トグル / 2段目=nav センタリング）、言語スイッチャを地球アイコン＋言語コードに
+- 本番反映済み（ユーザーが `wrangler` で実行）
 
 ## 次のアクション
-- PR #5 レビュー（法務英訳）→ マージ → ユーザーが `npx wrangler deploy` で本番反映
-- デプロイ後、In-App リンク（`7ofu.dev/schemely/...`）と旧 `/linkmint/*` の 301 を実地確認
-- 残: Issue #1（Schemely 紹介文の機能追記）
+- 実地確認: スマホで `7ofu.dev/koura-diary/help` 等のヘッダー、旧 `/linkmint/*` の 301
+- 残: Issue #1（Schemely 紹介文にアプリ機能=QR生成・応援 を追記。ja/en 両方）
 
 ## ブロッカー・注意点
 - `git grep 'LinkMint|linkmint'` の残留は意図的な 2 箇所のみ: adr/0005（旧名の記録）と `public/_redirects`
