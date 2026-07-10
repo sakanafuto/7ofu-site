@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const docs = [
+  { href: '/kamekoro/terms', title: '利用規約', desc: 'アプリの利用条件' },
+  { href: '/kamekoro/privacy', title: 'プライバシーポリシー', desc: '情報の取扱い' },
+];
+---
+
+<BaseLayout title="カメコロ | 7ofu" description="カメコロの規約・ポリシー・お問い合わせ">
+  <section class="intro">
+    <p class="crumb"><a href="/">Home</a> / カメコロ</p>
+    <h1 class="title">
+      <img src="/kamekoro.png" alt="" width="40" height="40" />
+      カメコロ
+    </h1>
+    <p class="lead">
+      爬虫類をモチーフにした、かわいい給餌パズルゲーム。オフラインでも遊べて、
+      ランキングで世界中のスコアと競えます。
+    </p>
+  </section>
+
+  <section>
+    <h2>ダウンロード</h2>
+    <div class="stores">
+      <div class="store store--wip">
+        <span class="store__os">iOS</span>
+        <strong class="store__state">🚧 準備中</strong>
+        <small>App Store 版を準備しています。</small>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>規約・ポリシー</h2>
+    <ul class="doclist">
+      {docs.map((d) => (
+        <li>
+          <a href={d.href}>
+            <strong>{d.title}</strong>
+            <small>{d.desc}</small>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section>
+    <h2>お問い合わせ</h2>
+    <ul class="doclist">
+      <li>
+        <a href="/kamekoro/contact">
+          <strong>お問い合わせフォーム</strong>
+          <small>要望・不具合の報告・ニックネームの通報など</small>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <style>
+    .intro { margin-bottom: 1rem; }
+    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+    .title { display: flex; align-items: center; gap: 0.65rem; }
+    .title img { border-radius: 9px; }
+    .lead { color: var(--muted); line-height: 1.75; }
+    .doclist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .doclist a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1.15rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.15s ease;
+    }
+    .doclist a:hover { border-color: var(--brand); }
+    .doclist small { color: var(--muted); }
+
+    .stores {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 20rem));
+      gap: 1rem;
+    }
+    .store {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+    .store--wip { background: #f7f4ec; }
+    .store__os {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .store__state { font-size: 1.05rem; }
+    .store small { color: var(--muted); }
+  </style>
+</BaseLayout>

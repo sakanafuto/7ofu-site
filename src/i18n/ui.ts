@@ -28,6 +28,7 @@ export const switchLangLabel: Record<Lang, string> = {
 export const appName = {
   koura: { ja: 'こうら日記', en: 'Koura Diary' },
   schemely: { ja: 'Schemely', en: 'Schemely' },
+  kamekoro: { ja: 'カメコロ', en: 'Kamekoro' },
 } as const;
 
 // 共有レイアウト（BaseLayout / DocLayout）が両 locale を 1 ファイルから描画するための最小辞書。
@@ -38,6 +39,7 @@ export const ui = {
     'nav.home': 'Home',
     'nav.koura': 'こうら日記',
     'nav.schemely': 'Schemely',
+    'nav.kamekoro': 'カメコロ',
     'meta.siteDescription': '7ofu の個人サイト',
     'doc.updated': '最終更新:',
     'doc.back': '← {app}トップにもどる',
@@ -46,6 +48,7 @@ export const ui = {
     'nav.home': 'Home',
     'nav.koura': 'Koura Diary',
     'nav.schemely': 'Schemely',
+    'nav.kamekoro': 'Kamekoro',
     'meta.siteDescription': "7ofu's personal site",
     'doc.updated': 'Last updated:',
     'doc.back': '← Back to {app}',

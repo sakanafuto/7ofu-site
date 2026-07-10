@@ -20,6 +20,7 @@ const nav = [
   { href: localizePath('/', lang), label: t('nav.home') },
   { href: localizePath('/koura-diary/', lang), label: t('nav.koura') },
   { href: localizePath('/schemely/', lang), label: t('nav.schemely') },
+  { href: localizePath('/kamekoro/', lang), label: t('nav.kamekoro') },
 ];
 const otherLang = lang === 'ja' ? 'en' : 'ja';
 const switchHref = alternatePath(Astro.url.pathname, otherLang);
@@ -129,7 +130,7 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
           order: 1;
           flex-basis: 100%;
           justify-content: center;
-          gap: 1.5rem;
+          gap: 1.25rem;
           margin-inline-start: 0;
         }
         .lang-switch { margin-inline-start: auto; }

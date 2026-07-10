@@ -38,6 +38,25 @@ const updated = frontmatter.updated
     .body :global(ol),
     .body :global(ul) { padding-left: 1.4rem; }
     .body :global(li) { margin-block: 0.5rem; }
+    .body :global(table) {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-block: 1.5rem;
+    }
+    .body :global(th),
+    .body :global(td) {
+      border: 1px solid var(--line);
+      padding: 0.55rem 0.7rem;
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: break-word;
+    }
+    .body :global(th) { background: #f2eee3; font-weight: 600; }
+    /* 3 列表は狭い画面で横スクロールに逃がす。 */
+    @media (max-width: 34rem) {
+      .body :global(table) { display: block; overflow-x: auto; }
+    }
     .back {
       margin-top: 4rem;
       padding-top: 1.75rem;
