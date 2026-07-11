@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Sent | Kamekoro" description="Your message has been sent">
+  <section class="intro">
+    <p class="crumb">
+      <a href="/en/">Home</a> / <a href="/en/kamekoro">Kamekoro</a> / Sent
+    </p>
+    <h1>Message sent</h1>
+    <p>
+      Thanks for reaching out. I'll review your message and get back to you if needed.
+    </p>
+    <p><a class="back" href="/en/kamekoro">← Back to Kamekoro</a></p>
+  </section>
+
+  <style>
+    .intro { margin-bottom: 1rem; }
+    .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+    .back { color: var(--brand); }
+  </style>
+</BaseLayout>
