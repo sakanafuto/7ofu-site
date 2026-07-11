@@ -77,6 +77,26 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     </p>
   </form>
 
+  <script is:inline>
+    // Preselect the inquiry type from ?type= (same pattern as the
+    // koura-diary contact page; kamekoro Issue #33). If ?nickname= is
+    // present, seed the message with the reported nickname (editable).
+    const params = new URLSearchParams(location.search);
+    const t = params.get('type');
+    const map = {
+      'report-nickname': 'Report a nickname',
+      bug: 'Bug report',
+      request: 'Request',
+    };
+    const sel = document.querySelector('select[name="種別"]');
+    if (t && sel && map[t]) sel.value = map[t];
+    const nickname = params.get('nickname');
+    const msg = document.querySelector('textarea[name="message"]');
+    if (nickname && msg && !msg.value) {
+      msg.value = 'Reported nickname: ' + nickname + '\n';
+    }
+  </script>
+
   <style>
     .intro { margin-bottom: 2rem; }
     .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }

@@ -77,6 +77,26 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     </p>
   </form>
 
+  <script is:inline>
+    // アプリ内の通報・問い合わせ導線から ?type= を受けて種別を初期選択する
+    // （koura-diary の contact と同じパターン・kamekoro Issue #33）。
+    // ?nickname= があれば通報対象を本文へ事前入力する（ユーザーが上書き可能）。
+    const params = new URLSearchParams(location.search);
+    const t = params.get('type');
+    const map = {
+      'report-nickname': 'ニックネーム通報',
+      bug: '不具合報告',
+      request: '要望・リクエスト',
+    };
+    const sel = document.querySelector('select[name="種別"]');
+    if (t && sel && map[t]) sel.value = map[t];
+    const nickname = params.get('nickname');
+    const msg = document.querySelector('textarea[name="message"]');
+    if (nickname && msg && !msg.value) {
+      msg.value = '通報対象のニックネーム: ' + nickname + '\n';
+    }
+  </script>
+
   <style>
     .intro { margin-bottom: 2rem; }
     .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
