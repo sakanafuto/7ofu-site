@@ -66,6 +66,14 @@ only, and is never sent to the Developer's servers or any third party:
 
 Uninstalling the App removes this data from your device.
 
+### About Saving to Your Photo Library
+
+The App can save an image of your tank (the game board) to your device's
+photo library after a game ends. This feature uses **add-only permission**
+and **never reads existing photos or videos in your library**. Saved images
+stay on your device and are never transmitted to the Developer or any third
+party.
+
 ## 4. Third-Party Sharing (Data Processing)
 
 To provide the functionality described in Section 1, the App uses the
@@ -119,10 +127,11 @@ children (and does not display any advertising at all).
 ## 7. Contact Us / Requesting Deletion
 
 For questions about how the App handles personal information, to report an
-inappropriate nickname, or to request deletion of your data, please contact
-us at the address below.
+inappropriate nickname, or to request deletion of your data, please reach us
+via the contact form or the address below.
 
-**Contact: 7ofu.dev@gmail.com**
+- Contact form: https://7ofu.dev/en/kamekoro/contact
+- **Contact: 7ofu.dev@gmail.com**
 
 ### About Data Deletion (An Honest Explanation)
 
