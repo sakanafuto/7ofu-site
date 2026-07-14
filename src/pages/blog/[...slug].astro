@@ -1,0 +1,116 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title={`${post.data.title} | 7ofu`} description={post.data.description}>
+  <article class="post">
+    <p class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a></p>
+    <h1>{post.data.title}</h1>
+    <p class="meta">
+      <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+      {post.data.updatedDate && <span>（更新 {fmt(post.data.updatedDate)}）</span>}
+      {post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}
+    </p>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      post.data.app === 'schemely' && (
+        <aside class="cta">
+          <strong>この記事の検証は Schemely で試せます</strong>
+          <p>
+            任意の URL をタップして「実際にどう開くか」を確かめる iOS 向けツールです。AASA
+            インスペクタで Universal Link のマッチも確認できます。
+          </p>
+          <a class="cta__link" href="/schemely/">Schemely を見る →</a>
+        </aside>
+      )
+    }
+  </article>
+
+  <style>
+    .crumb {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-block: 0.5rem 2.5rem;
+    }
+    .meta .tag {
+      margin-left: 0.5rem;
+    }
+    .prose :global(h2) {
+      font-size: 1.2rem;
+    }
+    .prose :global(h3) {
+      font-size: 1.05rem;
+      margin: 2.25rem 0 1rem;
+    }
+    .prose :global(pre) {
+      background: #1e1e1e;
+      color: #eaeaea;
+      padding: 1rem 1.15rem;
+      border-radius: 0.6rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .prose :global(code) {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88em;
+    }
+    .prose :global(:not(pre) > code) {
+      background: color-mix(in srgb, var(--brand) 12%, var(--bg));
+      padding: 0.1em 0.35em;
+      border-radius: 0.3em;
+    }
+    .prose :global(blockquote) {
+      border-left: 3px solid var(--brand);
+      margin-inline: 0;
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+    .prose :global(ul),
+    .prose :global(ol) {
+      padding-left: 1.4rem;
+    }
+    .prose :global(li) {
+      margin-block: 0.4rem;
+    }
+    .prose :global(a) {
+      text-decoration: underline;
+    }
+    .cta {
+      margin-top: 3.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      background: color-mix(in srgb, var(--brand) 8%, var(--bg));
+    }
+    .cta strong {
+      color: var(--brand);
+    }
+    .cta__link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+  </style>
+</BaseLayout>

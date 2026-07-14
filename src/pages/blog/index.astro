@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title="Blog | 7ofu" description="7ofu の技術メモ・開発ログ。iOS / Deep Link / 個人開発。">
+  <section class="intro">
+    <p class="crumb"><a href="/">Home</a> / Blog</p>
+    <h1 class="title">Blog</h1>
+    <p class="lead">つくったアプリの裏側や、iOS 開発でハマったことのメモ。</p>
+  </section>
+
+  {
+    posts.length === 0 ? (
+      <p>まだ記事がありません。</p>
+    ) : (
+      <ul class="postlist">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>
+              <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+              <strong>{post.data.title}</strong>
+              <small>{post.data.description}</small>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <style>
+    .crumb {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .lead {
+      color: var(--muted);
+    }
+    .postlist {
+      list-style: none;
+      margin: 2rem 0 0;
+      padding: 0;
+    }
+    .postlist li + li {
+      margin-top: 0.5rem;
+    }
+    .postlist a {
+      display: block;
+      padding: 1rem 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      text-decoration: none;
+      color: var(--fg);
+      background: color-mix(in srgb, var(--bg) 60%, white);
+    }
+    .postlist a:hover {
+      border-color: var(--brand);
+    }
+    .postlist time {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .postlist strong {
+      display: block;
+      margin: 0.15rem 0 0.3rem;
+      color: var(--brand);
+      font-size: 1.05rem;
+    }
+    .postlist small {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  </style>
+</BaseLayout>

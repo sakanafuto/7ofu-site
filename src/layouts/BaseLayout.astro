@@ -21,6 +21,8 @@ const nav = [
   { href: localizePath('/koura-diary/', lang), label: t('nav.koura') },
   { href: localizePath('/schemely/', lang), label: t('nav.schemely') },
   { href: localizePath('/kamekoro/', lang), label: t('nav.kamekoro') },
+  // ブログは ja のみ。en 記事が出たら en ナビにも出す
+  ...(lang === 'ja' ? [{ href: '/blog/', label: t('nav.blog') }] : []),
 ];
 const otherLang = lang === 'ja' ? 'en' : 'ja';
 const switchHref = alternatePath(Astro.url.pathname, otherLang);
