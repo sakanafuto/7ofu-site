@@ -4,6 +4,7 @@ import {
   useTranslations,
   localizePath,
   alternatePath,
+  hasAlternate,
   languageShort,
   switchLangLabel,
 } from '../i18n/ui';
@@ -21,11 +22,16 @@ const nav = [
   { href: localizePath('/koura-diary/', lang), label: t('nav.koura') },
   { href: localizePath('/schemely/', lang), label: t('nav.schemely') },
   { href: localizePath('/kamekoro/', lang), label: t('nav.kamekoro') },
-  // ブログは ja のみ。en 記事が出たら en ナビにも出す
+  // ブログは ja のみ。en 記事が出たら en ナビにも出す（ui.ts の jaOnlyPrefixes と対で更新する）
   ...(lang === 'ja' ? [{ href: '/blog/', label: t('nav.blog') }] : []),
 ];
 const otherLang = lang === 'ja' ? 'en' : 'ja';
-const switchHref = alternatePath(Astro.url.pathname, otherLang);
+// en 版が無いページ（ブログ等）では別 locale の同一ページが存在しないため、
+// スイッチャは別 locale のトップへ逃がす（`/en/blog/...` 等の 404 を避ける）。
+const alternateExists = hasAlternate(Astro.url.pathname);
+const switchHref = alternateExists
+  ? alternatePath(Astro.url.pathname, otherLang)
+  : localizePath('/', otherLang);
 // hreflang 用の絶対 URL（Astro.site = https://7ofu.dev）。
 const jaHref = new URL(alternatePath(Astro.url.pathname, 'ja'), Astro.site).href;
 const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href;
@@ -40,7 +46,7 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" hreflang="ja" href={jaHref} />
-    <link rel="alternate" hreflang="en" href={enHref} />
+    {alternateExists && <link rel="alternate" hreflang="en" href={enHref} />}
     <link rel="alternate" hreflang="x-default" href={jaHref} />
     <title>{title}</title>
     <!-- Lism CSS（デザインフレームワーク・#75）。デザイントークン/タイポグラフィのベース。 -->

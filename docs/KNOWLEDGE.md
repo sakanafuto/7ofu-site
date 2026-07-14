@@ -32,7 +32,9 @@
 - **共有レイアウト（BaseLayout / DocLayout）だけが両 locale を 1 ファイルで描画**し、辞書 `ui` で
   nav・doc 定型文を切替。ランディング・規約の本文は locale 別ページ（`src/pages/en/**`）に持つ。
 - 言語スイッチャ／hreflang は `alternatePath(pathname, lang)` で対になる URL を生成（`/en` 接頭辞の
-  付け外し・末尾スラッシュ込みで解決）。**新ページは ja/en 両方作る**（片方欠けるとスイッチャが 404）。
+  付け外し・末尾スラッシュ込みで解決）。**新ページは原則 ja/en 両方作る**（片方欠けると対になる URL が
+  無い）。ja 専用にするセクション（ブログ等）は `src/i18n/ui.ts` の `jaOnlyPrefixes` に登録すると、
+  スイッチャは別 locale のトップへ逃げ・hreflang は en alternate を出さずフォールバックする（adr/0007）。
 - 問い合わせフォームは共通化せず en を新規作成（稼働中 ja フォームを触らない）。en は件名に `(EN)`、
   redirect を `/en/<app>/thanks`。option の value は英語だが `name="種別"` は ja と揃えて通知を統一。
 - ビルド HTML の `<!-- Lism CSS（デザイン…） -->` 開発コメントは全 locale に残る（不可視・無害）。

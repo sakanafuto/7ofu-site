@@ -92,3 +92,18 @@ export function localizePath(basePath: string, lang: Lang): string {
 export function alternatePath(currentPathname: string, lang: Lang): string {
   return localizePath(toBasePath(currentPathname), lang);
 }
+
+// ja のみで提供するセクション（en 版ページを持たないパス接頭辞）。en 版を用意したらここから外す。
+// nav（BaseLayout.astro）のブログ出し分けと同じ「ブログは ja 専用」事実を表す。片方だけ変えない。
+// 末尾スラッシュ無しで登録すること（判定が `base === p` / `startsWith(p + '/')` に依存する）。
+const jaOnlyPrefixes = ['/blog'];
+
+/**
+ * 現在のパスが両 locale で提供されているか。false なら ja 専用（en 版なし）。
+ * en 版の無いパスに `/en` を前置すると 404 になるため、言語スイッチャの飛び先と
+ * hreflang alternate の出し分けにこの判定を使う。
+ */
+export function hasAlternate(currentPathname: string): boolean {
+  const base = toBasePath(currentPathname);
+  return !jaOnlyPrefixes.some((p) => base === p || base.startsWith(p + '/'));
+}
