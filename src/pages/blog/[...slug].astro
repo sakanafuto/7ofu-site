@@ -28,6 +28,14 @@ const fmt = (d: Date) =>
       <Content />
     </div>
 
+    <div class="like" data-slug={post.id}>
+      <button class="like__btn" type="button" aria-label="この記事にいいね">
+        <span class="like__heart" aria-hidden="true">♥</span>
+        <span class="like__count">–</span>
+      </button>
+      <span class="like__label">この記事がよかったら ♥ を押してください</span>
+    </div>
+
     {
       post.data.app === 'schemely' && (
         <aside class="cta">
@@ -112,5 +120,86 @@ const fmt = (d: Date) =>
       font-weight: 700;
       text-decoration: none;
     }
+    .like {
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .like__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font: inherit;
+      font-weight: 700;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      transition:
+        color 0.15s ease,
+        border-color 0.15s ease,
+        background 0.15s ease;
+    }
+    .like__btn:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+    .like__btn:disabled {
+      cursor: default;
+    }
+    .like__heart {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .like__btn.is-liked {
+      color: #c0392b;
+      border-color: color-mix(in srgb, #c0392b 40%, var(--line));
+      background: color-mix(in srgb, #c0392b 8%, white);
+    }
+    .like__label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
   </style>
+
+  <script>
+    const box = document.querySelector('.like');
+    if (box instanceof HTMLElement && box.dataset.slug) {
+      const slug = box.dataset.slug;
+      const btn = box.querySelector('.like__btn');
+      const countEl = box.querySelector('.like__count');
+      const likedKey = `liked:${slug}`;
+      const api = `/api/like?slug=${encodeURIComponent(slug)}`;
+
+      const setCount = (n) => {
+        if (countEl) countEl.textContent = String(n ?? 0);
+      };
+      if (localStorage.getItem(likedKey) === '1') btn?.classList.add('is-liked');
+
+      fetch(api)
+        .then((r) => r.json())
+        .then((d) => setCount(d.count))
+        .catch(() => setCount(0));
+
+      btn?.addEventListener('click', async () => {
+        if (localStorage.getItem(likedKey) === '1') return;
+        btn.setAttribute('disabled', 'true');
+        try {
+          const r = await fetch(api, { method: 'POST' });
+          const d = await r.json();
+          setCount(d.count);
+          localStorage.setItem(likedKey, '1');
+          btn.classList.add('is-liked');
+        } catch {
+          // ネットワーク失敗時は状態を変えない
+        } finally {
+          btn.removeAttribute('disabled');
+        }
+      });
+    }
+  </script>
 </BaseLayout>
