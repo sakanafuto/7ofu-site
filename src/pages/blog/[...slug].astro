@@ -1,0 +1,205 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title={`${post.data.title} | 7ofu`} description={post.data.description}>
+  <article class="post">
+    <p class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a></p>
+    <h1>{post.data.title}</h1>
+    <p class="meta">
+      <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+      {post.data.updatedDate && <span>（更新 {fmt(post.data.updatedDate)}）</span>}
+      {post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}
+    </p>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <div class="like" data-slug={post.id}>
+      <button class="like__btn" type="button" aria-label="この記事にいいね">
+        <span class="like__heart" aria-hidden="true">♥</span>
+        <span class="like__count">–</span>
+      </button>
+      <span class="like__label">この記事がよかったら ♥ を押してください</span>
+    </div>
+
+    {
+      post.data.app === 'schemely' && (
+        <aside class="cta">
+          <strong>この記事の検証は Schemely で試せます</strong>
+          <p>
+            任意の URL をタップして「実際にどう開くか」を確かめる iOS 向けツールです。AASA
+            インスペクタで Universal Link のマッチも確認できます。
+          </p>
+          <a class="cta__link" href="/schemely/">Schemely を見る →</a>
+        </aside>
+      )
+    }
+  </article>
+
+  <style>
+    .crumb {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-block: 0.5rem 2.5rem;
+    }
+    .meta .tag {
+      margin-left: 0.5rem;
+    }
+    .prose :global(h2) {
+      font-size: 1.2rem;
+    }
+    .prose :global(h3) {
+      font-size: 1.05rem;
+      margin: 2.25rem 0 1rem;
+    }
+    .prose :global(pre) {
+      background: #1e1e1e;
+      color: #eaeaea;
+      padding: 1rem 1.15rem;
+      border-radius: 0.6rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .prose :global(code) {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88em;
+    }
+    .prose :global(:not(pre) > code) {
+      background: color-mix(in srgb, var(--brand) 12%, var(--bg));
+      padding: 0.1em 0.35em;
+      border-radius: 0.3em;
+    }
+    .prose :global(blockquote) {
+      border-left: 3px solid var(--brand);
+      margin-inline: 0;
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+    .prose :global(ul),
+    .prose :global(ol) {
+      padding-left: 1.4rem;
+    }
+    .prose :global(li) {
+      margin-block: 0.4rem;
+    }
+    .prose :global(a) {
+      text-decoration: underline;
+    }
+    .cta {
+      margin-top: 3.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      background: color-mix(in srgb, var(--brand) 8%, var(--bg));
+    }
+    .cta strong {
+      color: var(--brand);
+    }
+    .cta__link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .like {
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .like__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font: inherit;
+      font-weight: 700;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      transition:
+        color 0.15s ease,
+        border-color 0.15s ease,
+        background 0.15s ease;
+    }
+    .like__btn:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+    .like__btn:disabled {
+      cursor: default;
+    }
+    .like__heart {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .like__btn.is-liked {
+      color: #c0392b;
+      border-color: color-mix(in srgb, #c0392b 40%, var(--line));
+      background: color-mix(in srgb, #c0392b 8%, white);
+    }
+    .like__label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+
+  <script>
+    const box = document.querySelector('.like');
+    if (box instanceof HTMLElement && box.dataset.slug) {
+      const slug = box.dataset.slug;
+      const btn = box.querySelector('.like__btn');
+      const countEl = box.querySelector('.like__count');
+      const likedKey = `liked:${slug}`;
+      const api = `/api/like?slug=${encodeURIComponent(slug)}`;
+
+      const setCount = (n) => {
+        if (countEl) countEl.textContent = String(n ?? 0);
+      };
+      if (localStorage.getItem(likedKey) === '1') btn?.classList.add('is-liked');
+
+      fetch(api)
+        .then((r) => r.json())
+        .then((d) => setCount(d.count))
+        .catch(() => setCount(0));
+
+      btn?.addEventListener('click', async () => {
+        if (localStorage.getItem(likedKey) === '1') return;
+        btn.setAttribute('disabled', 'true');
+        try {
+          const r = await fetch(api, { method: 'POST' });
+          const d = await r.json();
+          setCount(d.count);
+          localStorage.setItem(likedKey, '1');
+          btn.classList.add('is-liked');
+        } catch {
+          // ネットワーク失敗時は状態を変えない
+        } finally {
+          btn.removeAttribute('disabled');
+        }
+      });
+    }
+  </script>
+</BaseLayout>

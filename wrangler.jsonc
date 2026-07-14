@@ -1,9 +1,23 @@
 {
-  // Cloudflare Workers（Static Assets）で Astro のビルド出力(dist)を配信する設定。
-  // ビルド: npm run build → dist/ を生成 / デプロイ: npx wrangler deploy
-  "name": "7ofu-site",
-  "compatibility_date": "2026-07-01",
-  "assets": {
-    "directory": "./dist"
-  }
+	// Cloudflare Workers（Static Assets）で Astro のビルド出力(dist)を配信する設定。
+	// ビルド: npm run build → dist/ を生成 / デプロイ: npx wrangler deploy
+	//
+	// いいね機能（adr/0006）のため薄い Worker を前段に置く。静的アセットが先に返り、
+	// 非アセットの /api/like のみ worker/index.ts が処理する。
+	"name": "7ofu-site",
+	"compatibility_date": "2026-07-01",
+	"main": "worker/index.ts",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	// いいねカウントの保存先。初回のみ作成が必要:
+	//   npx wrangler kv namespace create LIKES
+	// 出力された id を下の "REPLACE_WITH_KV_ID" に貼る（置換するまで deploy は失敗する）。
+	"kv_namespaces": [
+		{
+			"binding": "LIKES",
+			"id": "b09737e8e1e1420fa773fd3703da9bd2"
+		}
+	]
 }
