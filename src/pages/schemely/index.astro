@@ -22,11 +22,11 @@ const docs = [
   <section>
     <h2>ダウンロード</h2>
     <div class="stores">
-      <div class="store store--wip">
+      <a class="store store--live" href="https://apps.apple.com/app/id6788003083">
         <span class="store__os">iOS</span>
-        <strong class="store__state">🚧 準備中</strong>
-        <small>App Store 版を準備しています。</small>
-      </div>
+        <strong class="store__state">App Store で入手</strong>
+        <small>iPhone・iOS 18 以降</small>
+      </a>
     </div>
   </section>
 
@@ -111,6 +111,8 @@ const docs = [
       background: white;
     }
     .store--wip { background: #f7f4ec; }
+    .store--live { color: var(--fg); text-decoration: none; transition: border-color 0.15s ease; }
+    .store--live:hover { border-color: var(--brand); }
     .store__os {
       font-size: 0.8rem;
       color: var(--muted);
