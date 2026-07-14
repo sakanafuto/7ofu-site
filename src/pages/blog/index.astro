@@ -8,6 +8,10 @@ const posts = (await getCollection('blog'))
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// 記事の関連アプリ slug → 表示ラベル。未知の slug はそのまま出す
+const appLabel = (slug?: string) =>
+  slug ? ({ schemely: 'Schemely', koura: 'こうら日記', kamekoro: 'カメコロ' }[slug] ?? slug) : null;
 ---
 
 <BaseLayout title="Blog | 7ofu" description="7ofu の技術メモ・開発ログ。iOS / Deep Link / 個人開発。">
@@ -25,7 +29,10 @@ const fmt = (d: Date) =>
         {posts.map((post) => (
           <li>
             <a href={`/blog/${post.id}/`}>
-              <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+              <span class="postmeta">
+                <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+                {appLabel(post.data.app) && <span class="badge">{appLabel(post.data.app)}</span>}
+              </span>
               <strong>{post.data.title}</strong>
               <small>{post.data.description}</small>
             </a>
@@ -78,6 +85,20 @@ const fmt = (d: Date) =>
       color: var(--muted);
       font-size: 0.9rem;
       line-height: 1.6;
+    }
+    .postmeta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--brand);
+      background: color-mix(in srgb, var(--brand) 10%, white);
+      border: 1px solid color-mix(in srgb, var(--brand) 25%, var(--line));
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
     }
   </style>
 </BaseLayout>
