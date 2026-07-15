@@ -91,9 +91,9 @@ arrangement necessary to operate the App's features.
 For details on how Google handles data on these services, see the
 [Google Privacy Policy](https://policies.google.com/privacy).
 
-If you make an in-app purchase (IAP), payment is processed entirely by the
-Apple App Store / Google Play. The App never collects or stores your payment
-information (e.g., credit card numbers).
+If you make an in-app purchase (IAP), payment is processed entirely by your
+device's app store (Apple App Store). The App never collects or stores your
+payment information (e.g., credit card numbers).
 
 We do not share your information with any third party other than as
 described above.
