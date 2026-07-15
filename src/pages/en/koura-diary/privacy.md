@@ -47,7 +47,7 @@ Notifications such as reminders are delivered as **local notifications on the de
 - Records can be deleted individually at any time within the App.
 - From "Settings → Data and Backup," you can **back up (export) and restore (import)** all data, including photos.
 - From the bottom of "Settings," you can **delete all data within the App**.
-- You can also delete your account and data.
+- You can also delete your account and data. See [Account & Data Deletion](/en/koura-diary/account-deletion) for the steps.
 - For other requests such as disclosure or deletion, please contact us via the contact below.
 
 ## 7. Revisions
