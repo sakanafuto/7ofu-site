@@ -31,30 +31,6 @@ const docs = [
         <strong class="store__state">App Store で入手 ↗</strong>
         <small>iPhone / iPad に対応。</small>
       </a>
-      <div class="store store--wip">
-        <span class="store__os">Android</span>
-        <strong class="store__state">🚧 開発中</strong>
-        <small>Google Play 版を準備しています。</small>
-      </div>
-    </div>
-    <div class="recruit">
-      <p>
-        <strong>Android 版のテスターを募集しています。</strong>
-        Google Play の公開にはテスターの協力（クローズドテスト）が必要です。
-        ご協力いただける方は、ぜひひとことお寄せください。
-      </p>
-      <div class="recruit__actions">
-        <a class="btn btn--primary" href="/koura-diary/contact?type=tester">
-          テスターに応募する
-        </a>
-        <a class="btn" href="/koura-diary/contact?type=request">
-          Android 版がほしいと要望を送る
-        </a>
-      </div>
-      <p class="recruit__note">
-        ※ お申し込み後すぐにテストを開始できるわけではありません。準備が整い次第、
-        いただいたメールアドレス宛に個別でご案内させていただく場合があります。
-      </p>
     </div>
   </section>
 
@@ -113,11 +89,9 @@ const docs = [
 
     .stores {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       gap: 1rem;
-    }
-    @media (max-width: 480px) {
-      .stores { grid-template-columns: 1fr; }
+      max-width: 22rem;
     }
     .store {
       display: flex;
@@ -128,7 +102,6 @@ const docs = [
       border-radius: 14px;
       background: white;
     }
-    .store--wip { background: #f7f4ec; }
     a.store {
       text-decoration: none;
       color: inherit;
@@ -143,40 +116,5 @@ const docs = [
     }
     .store__state { font-size: 1.05rem; }
     .store small { color: var(--muted); }
-
-    .recruit {
-      margin-top: 1.25rem;
-      padding: 1.25rem 1.35rem;
-      border: 1px solid var(--line);
-      border-left: 3px solid var(--brand);
-      border-radius: 14px;
-      background: #fbfaf5;
-    }
-    .recruit p { margin: 0 0 0.95rem; line-height: 1.75; }
-    .recruit__note {
-      margin: 0.95rem 0 0;
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .recruit__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.6rem 1.1rem;
-      border-radius: 10px;
-      border: 1px solid var(--brand);
-      color: var(--brand);
-      background: white;
-      text-decoration: none;
-      font-size: 0.92rem;
-      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-    }
-    .btn:hover { background: var(--brand); color: white; }
-    .btn--primary { background: var(--brand); color: white; }
-    .btn--primary:hover { opacity: 0.88; }
   </style>
 </BaseLayout>
