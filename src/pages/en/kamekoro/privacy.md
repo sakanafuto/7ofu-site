@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Privacy Policy
 app: Kamekoro
 hub: /en/kamekoro/
-updated: 2026-07-11
+updated: 2026-07-16
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/kamekoro/privacy) prevails.
@@ -61,8 +61,9 @@ only, and is never sent to the Developer's servers or any third party:
 - Settings (nickname draft, language, skin, BGM/sound effect toggles)
 - Your collection ("Dex") records
 - A local cache of your in-app purchase (IAP) unlock status (the source of
-  truth is Apple's/Google's payment platform; the App only caches this
-  locally to avoid a flash of the locked state while offline)
+  truth is your device's app store (Apple App Store) payment platform; the
+  App only caches this locally to avoid a flash of the locked state while
+  offline)
 
 Uninstalling the App removes this data from your device.
 
