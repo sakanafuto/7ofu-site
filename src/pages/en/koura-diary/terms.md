@@ -32,7 +32,7 @@ These Terms apply to all relationships between the user and the developer concer
 ## Article 5 (Support Feature / Payments)
 
 1. The App may include an optional payment (tip) feature to support development.
-2. Payments are made through each app store (App Store / Google Play), and refunds and the like follow each store's policies.
+2. Payments are made through your app store, and refunds and the like follow the store's policies.
 
 ## Article 6 (Prohibited Conduct)
 
