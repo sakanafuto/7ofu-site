@@ -8,7 +8,7 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
 
 <BaseLayout
   title="お問い合わせ | こうら日記"
-  description="こうら日記へのお問い合わせ・Android テスター応募・要望"
+  description="こうら日記へのお問い合わせ・要望"
 >
   <section class="intro">
     <p class="crumb">
@@ -16,7 +16,7 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     </p>
     <h1>お問い合わせ</h1>
     <p class="lead">
-      ご要望・不具合の報告・Android 版テスターへの応募など、お気軽にどうぞ。
+      ご要望・不具合の報告など、お気軽にどうぞ。
     </p>
   </section>
 
@@ -37,7 +37,6 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     <label>
       <span>種別</span>
       <select name="種別" required>
-        <option value="テスター応募">Android テスターに応募</option>
         <option value="要望・リクエスト">要望・リクエスト</option>
         <option value="不具合報告">不具合の報告</option>
         <option value="その他">その他のお問い合わせ</option>
@@ -58,9 +57,6 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
         autocomplete="email"
         placeholder="you@example.com"
       />
-      <small>
-        テスター応募の場合、この宛先にご案内します（Google アカウントのメール推奨）。
-      </small>
     </label>
 
     <label>
@@ -74,17 +70,9 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
 
     <button type="submit" class="btn btn--primary">送信する</button>
     <p class="note">
-      送信内容は運営者にメールで届きます。いただいたメールアドレスは、返信・テストのご案内の目的にのみ使用します。
+      送信内容は運営者にメールで届きます。いただいたメールアドレスは、返信の目的にのみ使用します。
     </p>
   </form>
-
-  <script is:inline>
-    // 募集ページのボタンから ?type= を受けて種別を初期選択する。
-    const t = new URLSearchParams(location.search).get('type');
-    const map = { tester: 'テスター応募', request: '要望・リクエスト', bug: '不具合報告' };
-    const sel = document.querySelector('select[name="種別"]');
-    if (t && sel && map[t]) sel.value = map[t];
-  </script>
 
   <style>
     .intro { margin-bottom: 2rem; }

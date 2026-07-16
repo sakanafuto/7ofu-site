@@ -8,7 +8,7 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
 
 <BaseLayout
   title="Contact | Koura Diary"
-  description="Contact, Android tester applications, and requests for Koura Diary"
+  description="Contact, requests, and bug reports for Koura Diary"
 >
   <section class="intro">
     <p class="crumb">
@@ -16,7 +16,7 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     </p>
     <h1>Contact</h1>
     <p class="lead">
-      Requests, bug reports, applying to be an Android tester, and more — feel free to reach out.
+      Requests, bug reports, and more — feel free to reach out.
     </p>
   </section>
 
@@ -37,7 +37,6 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
     <label>
       <span>Category</span>
       <select name="種別" required>
-        <option value="Apply as Android tester">Apply as an Android tester</option>
         <option value="Request">Request</option>
         <option value="Bug report">Bug report</option>
         <option value="Other">Other</option>
@@ -58,9 +57,6 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
         autocomplete="email"
         placeholder="you@example.com"
       />
-      <small>
-        For tester applications, we'll contact you at this address (a Google account email is recommended).
-      </small>
     </label>
 
     <label>
@@ -74,17 +70,9 @@ const WEB3FORMS_ACCESS_KEY = '4d53d18b-45ea-4a8b-b261-fbf883ace717';
 
     <button type="submit" class="btn btn--primary">Send</button>
     <p class="note">
-      Your message is delivered to the developer by email. Your email address is used only to reply or to send tester information.
+      Your message is delivered to the developer by email. Your email address is used only to reply.
     </p>
   </form>
-
-  <script is:inline>
-    // 募集ページのボタンから ?type= を受けて種別を初期選択する（値は en フォームの option に合わせる）。
-    const t = new URLSearchParams(location.search).get('type');
-    const map = { tester: 'Apply as Android tester', request: 'Request', bug: 'Bug report' };
-    const sel = document.querySelector('select[name="種別"]');
-    if (t && sel && map[t]) sel.value = map[t];
-  </script>
 
   <style>
     .intro { margin-bottom: 2rem; }
