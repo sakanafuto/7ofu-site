@@ -4,7 +4,7 @@ description: 'アプリは開くのに検証ツールは「対象外」と言う
 pubDate: 2026-07-15
 tags: ['iOS', 'Universal Link', 'Deep Link', 'AASA']
 app: 'schemely'
-draft: true
+draft: false
 ---
 
 [前回](/blog/universal-link-ga-hirakanai/)は Universal Link が開かない原因を、受け口から AASA まで疑う順に並べました。今回はその一段だけ深いところ、**入力 URL が AASA のどのルールにマッチするのか**を扱います。
