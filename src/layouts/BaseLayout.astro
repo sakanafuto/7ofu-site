@@ -151,6 +151,21 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         font-size: 0.85rem;
       }
       .site-footer .container { padding-block: 1.5rem; }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .footer-x {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        color: var(--muted);
+        text-decoration: none;
+      }
+      .footer-x:hover { color: var(--brand); }
+      .footer-x__label { font-size: 0.82rem; }
       a { color: var(--brand); }
       h1 { font-size: 1.7rem; line-height: 1.45; margin: 0 0 1rem; }
       h2 {
@@ -200,7 +215,29 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
       </div>
     </main>
     <footer class="site-footer">
-      <div class="container">© 2026 7ofu</div>
+      <div class="container footer-inner">
+        <span>© 2026 7ofu</span>
+        <a
+          class="footer-x"
+          href="https://x.com/KouraDiary"
+          target="_blank"
+          rel="noopener"
+          aria-label="こうら日記・カメコロの公式X（旧Twitter）"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="1em"
+            height="1em"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            ></path>
+          </svg>
+          <span class="footer-x__label">@KouraDiary</span>
+        </a>
+      </div>
     </footer>
   </body>
 </html>
