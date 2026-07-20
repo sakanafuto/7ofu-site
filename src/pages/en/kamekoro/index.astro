@@ -17,6 +17,29 @@ const docs = [
       A cute reptile-feeding physics puzzle game. Play offline, or compete with
       scores from around the world on the leaderboard.
     </p>
+    <p class="social">
+      <a
+        class="social-link"
+        href="https://x.com/KouraDiary"
+        target="_blank"
+        rel="noopener"
+        aria-label="Official X (formerly Twitter) for Koura Diary and Kamekoro"
+      >
+        <svg
+          class="social-link__icon"
+          viewBox="0 0 24 24"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+          ></path>
+        </svg>
+        <span>Official X @KouraDiary</span>
+      </a>
+    </p>
   </section>
 
   <section>
@@ -62,6 +85,21 @@ const docs = [
     .title { display: flex; align-items: center; gap: 0.65rem; }
     .title img { border-radius: 9px; }
     .lead { color: var(--muted); line-height: 1.75; }
+    .social { margin-top: 0.85rem; }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      color: var(--fg);
+      text-decoration: none;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .social-link:hover { border-color: var(--brand); color: var(--brand); }
+    .social-link__icon { flex-shrink: 0; }
     .doclist {
       list-style: none;
       padding: 0;
