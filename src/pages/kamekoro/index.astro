@@ -22,11 +22,16 @@ const docs = [
   <section>
     <h2>ダウンロード</h2>
     <div class="stores">
-      <div class="store store--wip">
+      <a
+        class="store store--live"
+        href="https://apps.apple.com/jp/app/%E3%82%AB%E3%83%A1%E3%82%B3%E3%83%AD/id6789081791"
+        target="_blank"
+        rel="noopener"
+      >
         <span class="store__os">iOS</span>
-        <strong class="store__state">🚧 準備中</strong>
-        <small>App Store 版を準備しています。</small>
-      </div>
+        <strong class="store__state">App Store で入手 ↗</strong>
+        <small>iPhone に対応。</small>
+      </a>
     </div>
   </section>
 
@@ -98,7 +103,13 @@ const docs = [
       border-radius: 14px;
       background: white;
     }
-    .store--wip { background: #f7f4ec; }
+    a.store {
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease;
+    }
+    a.store:hover { border-color: var(--brand); }
+    .store--live { border-color: var(--brand); }
     .store__os {
       font-size: 0.8rem;
       color: var(--muted);
