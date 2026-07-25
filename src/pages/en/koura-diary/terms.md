@@ -42,6 +42,7 @@ These Terms apply to all relationships between the user and the developer concer
 4. Posting content that infringes the rights of others, content unrelated to turtles, or other content the developer deems inappropriate is prohibited.
 5. Users may withdraw (delete) their own posts at any time.
 6. Inappropriate posts can be reported to the developer via the in-app report feature. The developer reviews reports and takes action such as unpublishing where necessary.
+7. Users can hide a particular poster's posts from their own screen (blocking). Blocking is not notified to the other party, and users can undo it themselves.
 
 ## Article 7 (Prohibited Conduct)
 

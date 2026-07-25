@@ -37,6 +37,7 @@ When you post to "Everyone's Turtles" and the developer approves publication, **
 
 - Posted photos are stored and published after metadata such as location data (Exif) has been removed.
 - You can withdraw (delete) your posts at any time from within the App; withdrawing deletes the photo and information.
+- If you block a poster, that information (the other party's identifier and, for your own reference, the animal name from the post) is **stored as your own data** and is not visible to other users or to the person you blocked.
 
 ## 5. Provision to / Entrustment to Third Parties
 
