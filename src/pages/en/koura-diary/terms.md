@@ -39,7 +39,7 @@ These Terms apply to all relationships between the user and the developer concer
 1. The App includes a posting feature ("Everyone's Turtles") that lets users publish turtle photos and information (name, species, and time since adoption) to other users within the App.
 2. Publication is subject to the developer's approval. The developer may approve or decline submissions, and may unpublish posted content, without disclosing reasons.
 3. Users may post only photos they hold the rights to. By posting, the user grants the developer a royalty-free license to store, display, and distribute the posted content to the extent necessary for display in the App. Copyright in posted content remains with the user.
-4. Posting content that infringes the rights of others, content unrelated to turtles, or other content the developer deems inappropriate is prohibited.
+4. Posting content that infringes the rights of others, content unrelated to turtles, or other content the developer deems inappropriate is prohibited. **The developer has zero tolerance for objectionable content and abusive users.** Where the developer judges content or conduct to fall under this clause, posts may be unpublished and the posting feature or the account itself may be suspended, without prior notice.
 5. Users may withdraw (delete) their own posts at any time.
 6. Inappropriate posts can be reported to the developer via the in-app report feature. The developer reviews reports and takes action such as unpublishing where necessary.
 7. Users can hide a particular poster's posts from their own screen (blocking). Blocking is not notified to the other party, and users can undo it themselves.
