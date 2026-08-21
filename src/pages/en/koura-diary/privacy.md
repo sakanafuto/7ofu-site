@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Privacy Policy
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-07-25
+updated: 2026-08-17
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/privacy) prevails.
@@ -19,13 +19,17 @@ This policy describes how user information is handled in "Koura Diary" (the "App
 - **Error / diagnostic information (crash data)**: When the app terminates unexpectedly, information (location of occurrence, device model, OS version, etc.) is collected by Firebase Crashlytics. This is for quality improvement, not to identify individuals. It is not collected in development (debug) builds.
 - **Abuse prevention**: Firebase App Check verifies that access comes from a legitimate, untampered app. This confirms device legitimacy and is not personal information.
 
-The App **shows no ads**. It performs no advertising-purpose tracking or advertising-identifier collection, and does not use analytics.
+This app does not display ads. We do not track you for advertising purposes (e.g. IDFA, advertising ID).
+
+- **Usage data (analytics)**: To improve the app, we use Google Firebase Analytics to measure how screens are used (e.g. which screens are used and how often). When you use the in-app tip (support) feature, Google Firebase Analytics also automatically records that a purchase occurred (including the product ID and amount; this does not include payment details such as card numbers). This does not include user content such as pet names or photos. Measurement uses a device/app-scoped identifier (the Analytics app-instance ID), which is not linked to the account information (e.g. email address) described above. We do not use this data for advertising purposes and do not share it with third parties.
+- Analytics collection is on by default. You can turn it off anytime from **Settings → Share usage data**. Once turned off, no further data is sent.
 
 ## 2. Purposes of Use
 
 - Storing, displaying, and analyzing care records (dietary-balance guides, body-condition guides, etc.)
 - Account authentication, data carry-over, and sharing within a family (household)
 - Understanding issues and improving the App's quality
+- Understanding app usage and improving app quality (screen usage measurement)
 
 ## 3. Sharing within a Family (Household)
 
@@ -43,7 +47,7 @@ When you post to "Everyone's Turtles" and the developer approves publication, **
 
 The App uses the following external services (Google LLC) for storage, authentication, and quality improvement, and the above information is transmitted to and stored by them. Each company's privacy policy applies, and data may be processed on servers outside your country.
 
-- Google Firebase (Firestore / Storage / Authentication / Crashlytics / App Check)
+- Google Firebase (Firestore / Storage / Authentication / Crashlytics / App Check / Analytics)
 
 The App does not sell or provide user information to any other third party (except as required by law).
 
@@ -57,6 +61,7 @@ Notifications such as reminders are delivered as **local notifications on the de
 - From "Settings → Data and Backup," you can **back up (export) and restore (import)** all data, including photos.
 - From the bottom of "Settings," you can **delete all data within the App**.
 - You can also delete your account and data. See [Account & Data Deletion](/en/koura-diary/account-deletion) for the steps.
+- **You can stop sending usage data (analytics) at any time from Settings → Share usage data.**
 - For other requests such as disclosure or deletion, please contact us via the contact below.
 
 ## 8. Revisions
