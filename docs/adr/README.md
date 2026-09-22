@@ -11,6 +11,8 @@
 | [0004](0004-i18n-en.md) | サイトの英語対応（i18n・ja ルート + /en/） | Accepted |
 | [0005](0005-rename-linkmint-to-schemely.md) | アプリ改名に追従してサイトを LinkMint → Schemely に改名 | Accepted |
 | [0006](0006-like-counter-worker-kv.md) | ブログのいいねボタン（Cloudflare Worker + KV） | Accepted |
+| [0007](0007-ja-only-sections-lang-switch-fallback.md) | ja 専用セクションの言語スイッチャ・hreflang フォールバック | Accepted |
+| [0008](0008-home-redesign-field-notes.md) | Home のリデザイン（観察ノートモチーフ・Spread・カメ進捗） | Accepted |
 
 ## フォーマット
 

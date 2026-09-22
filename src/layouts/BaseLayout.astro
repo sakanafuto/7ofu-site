@@ -8,14 +8,24 @@ import {
   languageShort,
   switchLangLabel,
 } from '../i18n/ui';
+import TortoiseWalk from '../components/TortoiseWalk.astro';
 
 export interface Props {
   title: string;
   description?: string;
+  /** 既定 'doc'（44rem・規約ページ）。Home / アプリ LP は 'wide'（72rem）を渡す（adr/0008）。 */
+  width?: 'doc' | 'wide';
+  /** ヘッダー直下にスクロール進捗で歩くカメを描画する（Home 専用の演出・adr/0008）。 */
+  tortoise?: boolean;
 }
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description = t('meta.siteDescription') } = Astro.props;
+const {
+  title,
+  description = t('meta.siteDescription'),
+  width = 'doc',
+  tortoise = false,
+} = Astro.props;
 
 const nav = [
   { href: localizePath('/', lang), label: t('nav.home') },
@@ -41,6 +51,7 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
@@ -54,14 +65,32 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/lism-css@0/dist/css/main.css"
     />
+    <!-- 観察ノートの世界観フォント（adr/0008）。見出し・英字は Inter、本文は Noto Sans JP、
+         手書き風ラベルのみ Zen Kurenaido。 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kurenaido&display=swap"
+    />
     <style is:global>
       :root {
         --site-max: 44rem;
+        --site-max-wide: 72rem;
         --brand: #41592d;
         --bg: #fbf7ee;
         --fg: #2c2c2c;
         --muted: #6b6b6b;
         --line: #e6e0d3;
+        /* 観察ノートの世界観トークン（adr/0008）。 */
+        --paper-2: #f4eddc;
+        --rule: rgba(65, 89, 45, 0.1);
+        --acc-koura: #4a7029;
+        --tint-koura: #e9f0dc;
+        --acc-schemely: #1f7358;
+        --tint-schemely: #dff4ec;
+        --acc-kamekoro: #9c5412;
+        --tint-kamekoro: #fdefcf;
       }
       * { box-sizing: border-box; }
       body {
@@ -69,13 +98,47 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         background: var(--bg);
         color: var(--fg);
         font-family:
-          system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+          'Noto Sans JP', system-ui, -apple-system, 'Hiragino Sans', sans-serif;
         line-height: 1.8;
+      }
+      .display {
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 800;
+      }
+      .label-hand {
+        font-family: 'Zen Kurenaido', 'Noto Sans JP', sans-serif;
+        font-weight: 400;
       }
       .container {
         max-width: var(--site-max);
         margin-inline: auto;
         padding-inline: 1.5rem;
+      }
+      .container--wide {
+        max-width: var(--site-max-wide);
+      }
+      /* .reveal の出現演出（adr/0008）。JS 無効時は html.js が付かないため常時表示のまま。 */
+      .reveal {
+        transition:
+          opacity 600ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          translate 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      html.js .reveal {
+        opacity: 0;
+        translate: 0 18px;
+      }
+      .reveal.is-in {
+        opacity: 1;
+        translate: 0 0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          transition: none;
+        }
+        html.js .reveal {
+          opacity: 1;
+          translate: 0 0;
+        }
       }
       .site-header {
         border-bottom: 1px solid var(--line);
@@ -209,8 +272,9 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         </a>
       </div>
     </header>
+    {tortoise && <TortoiseWalk />}
     <main>
-      <div class="container">
+      <div class:list={['container', { 'container--wide': width === 'wide' }]}>
         <slot />
       </div>
     </main>
@@ -239,5 +303,8 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         </a>
       </div>
     </footer>
+    <script>
+      import '../scripts/reveal.ts';
+    </script>
   </body>
 </html>
