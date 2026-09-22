@@ -127,7 +127,9 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         opacity: 0;
         translate: 0 18px;
       }
-      .reveal.is-in {
+      /* `.reveal.is-in` だけだと `html.js .reveal`（要素 1＋クラス 2）に詳細度で負け、
+         is-in が付いても透明のまま残る。必ず html.js を前置して同じ詳細度以上にする。 */
+      html.js .reveal.is-in {
         opacity: 1;
         translate: 0 0;
       }
