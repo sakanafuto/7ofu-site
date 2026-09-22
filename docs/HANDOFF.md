@@ -25,3 +25,5 @@
   `cwebp -q 82 -resize 640 0` で `public/shots/<app>/<lang>-<name>.webp` へ。寸法を変えたら `Spread.astro` の `shotDims` も更新
 - ヘッドレス Chrome（`--headless=new --virtual-time-budget=8000`）で出現演出込みの表示が撮れる。
   **見えないときは演出のバグを疑う**（`--force-prefers-reduced-motion` で回避すると c14899a の詳細度バグを見逃す）
+- モバイル幅の確認は `--window-size=360,...` では**不正確**（Chrome の最小ウィンドウ幅でビューポートが広がり右端が切れて見える）。
+  幅 360px の `<iframe>` を並べたローカル HTML を撮る（scratchpad の frame.html 方式）

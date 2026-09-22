@@ -1,14 +1,27 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Spread from '../../components/Spread.astro';
+import DocIndex from '../../components/DocIndex.astro';
 import { getApp } from '../../data/apps';
 
 const lang = 'ja';
 const app = getApp('schemely', lang);
 
+const articles = [
+  {
+    href: '/blog/universal-link-ga-hirakanai/',
+    title: 'Universal Link が「開かない」全パターン',
+    desc: 'iOS 実機で切り分けた Deep Link のハマりどころ',
+  },
+];
+
 const docs = [
   { href: '/schemely/terms', title: '利用規約', desc: 'アプリの利用条件' },
   { href: '/schemely/privacy', title: 'プライバシーポリシー', desc: '情報の取扱い（データ収集なし）' },
+];
+
+const contact = [
+  { href: '/schemely/contact', title: 'お問い合わせフォーム', desc: '要望・不具合の報告など' },
 ];
 ---
 
@@ -16,67 +29,20 @@ const docs = [
   <p class="crumb"><a href="/">Home</a> / Schemely</p>
   <Spread app={app} lang={lang} index={0} standalone eager />
 
-  <section>
-    <h2>解説記事</h2>
-    <ul class="doclist">
-      <li>
-        <a href="/blog/universal-link-ga-hirakanai/">
-          <strong>Universal Link が「開かない」全パターン</strong>
-          <small>iOS 実機で切り分けた Deep Link のハマりどころ</small>
-        </a>
-      </li>
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="解説記事" items={articles} />
   </section>
 
-  <section>
-    <h2>規約・ポリシー</h2>
-    <ul class="doclist">
-      {docs.map((d) => (
-        <li>
-          <a href={d.href}>
-            <strong>{d.title}</strong>
-            <small>{d.desc}</small>
-          </a>
-        </li>
-      ))}
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="規約・ポリシー" items={docs} />
   </section>
 
-  <section>
-    <h2>お問い合わせ</h2>
-    <ul class="doclist">
-      <li>
-        <a href="/schemely/contact">
-          <strong>お問い合わせフォーム</strong>
-          <small>要望・不具合の報告など</small>
-        </a>
-      </li>
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="お問い合わせ" items={contact} />
   </section>
 
   <style>
     .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
-    .doclist {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      max-width: 40rem;
-      display: grid;
-      gap: 1rem;
-    }
-    .doclist a {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding: 1.15rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: white;
-      text-decoration: none;
-      color: var(--fg);
-      transition: border-color 0.15s ease;
-    }
-    .doclist a:hover { border-color: var(--brand); }
-    .doclist small { color: var(--muted); }
+    .doc-section { margin-top: 3rem; }
   </style>
 </BaseLayout>

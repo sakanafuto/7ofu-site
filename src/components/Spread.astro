@@ -36,7 +36,8 @@ const strings = {
     subject: '観察対象',
     habitat: '生息地',
     state: '状態',
-    cta: 'App Store で入手 ↗',
+    ctaIos: 'App Store で入手 ↗',
+    ctaAndroid: 'Google Play で入手 ↗',
     soon: '近日公開',
     more: '詳しく →',
   },
@@ -44,7 +45,8 @@ const strings = {
     subject: 'Subject',
     habitat: 'Habitat',
     state: 'Status',
-    cta: 'Get it on the App Store ↗',
+    ctaIos: 'App Store ↗',
+    ctaAndroid: 'Google Play ↗',
     soon: 'Coming soon',
     more: 'Learn more →',
   },
@@ -90,7 +92,7 @@ const rotations = [-2, 2.4, -1.4] as const;
     </div>
 
     <div class="spread__note">
-      <p class="spread__label label-hand">No.{app.no}</p>
+      {app.no && <p class="spread__label label-hand">No.{app.no}</p>}
       <Heading id={`spread-${app.slug}-title`} class="spread__name">
         <img class="spread__icon" src={app.icon} alt="" width="32" height="32" />
         {app.name}
@@ -114,11 +116,22 @@ const rotations = [-2, 2.4, -1.4] as const;
         {app.features.map((feature) => <li>{feature}</li>)}
       </ul>
       <div class="spread__cta">
-        {app.status === 'live' ? (
-          <a class="spread__store" href={app.storeUrl} target="_blank" rel="noopener">
-            {s.cta}
+        {app.stores.ios && (
+          <a class="spread__store spread__store--ios" href={app.stores.ios} target="_blank" rel="noopener">
+            {s.ctaIos}
           </a>
-        ) : (
+        )}
+        {app.stores.android && (
+          <a
+            class="spread__store spread__store--android"
+            href={app.stores.android}
+            target="_blank"
+            rel="noopener"
+          >
+            {s.ctaAndroid}
+          </a>
+        )}
+        {!app.stores.ios && !app.stores.android && (
           <span class="spread__store spread__store--soon">{s.soon}</span>
         )}
         {!standalone && (
@@ -292,11 +305,17 @@ const rotations = [-2, 2.4, -1.4] as const;
     align-items: center;
     padding: 0.75rem 1.4rem;
     border-radius: 999px;
+    border: 1.5px solid transparent;
     background: var(--accent);
     color: white;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 600;
+  }
+  .spread__store--android {
+    background: transparent;
+    border-color: var(--accent);
+    color: var(--accent);
   }
   .spread__store--soon {
     background: var(--paper-2);

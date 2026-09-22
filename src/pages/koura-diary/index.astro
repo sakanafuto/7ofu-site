@@ -1,10 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Spread from '../../components/Spread.astro';
+import DocIndex from '../../components/DocIndex.astro';
 import { getApp } from '../../data/apps';
 
 const lang = 'ja';
 const app = getApp('koura', lang);
+
+const howto = [
+  { href: '/koura-diary/help', title: '使い方・ヘルプ', desc: '記録の付け方、家族との共有、バックアップ など' },
+];
 
 const docs = [
   { href: '/koura-diary/terms', title: '利用規約', desc: 'アプリの利用条件' },
@@ -18,55 +23,16 @@ const docs = [
   <p class="crumb"><a href="/">Home</a> / こうら日記</p>
   <Spread app={app} lang={lang} index={0} standalone eager />
 
-  <section>
-    <h2>使い方</h2>
-    <ul class="doclist">
-      <li>
-        <a href="/koura-diary/help">
-          <strong>使い方・ヘルプ</strong>
-          <small>記録の付け方、家族との共有、バックアップ など</small>
-        </a>
-      </li>
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="使い方" items={howto} />
   </section>
 
-  <section>
-    <h2>規約・ポリシー</h2>
-    <ul class="doclist">
-      {docs.map((d) => (
-        <li>
-          <a href={d.href}>
-            <strong>{d.title}</strong>
-            <small>{d.desc}</small>
-          </a>
-        </li>
-      ))}
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="規約・ポリシー" items={docs} />
   </section>
 
   <style>
     .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
-    .doclist {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      max-width: 40rem;
-      display: grid;
-      gap: 1rem;
-    }
-    .doclist a {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding: 1.15rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: white;
-      text-decoration: none;
-      color: var(--fg);
-      transition: border-color 0.15s ease;
-    }
-    .doclist a:hover { border-color: var(--brand); }
-    .doclist small { color: var(--muted); }
+    .doc-section { margin-top: 3rem; }
   </style>
 </BaseLayout>

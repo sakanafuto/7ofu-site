@@ -1,0 +1,112 @@
+---
+// LP 下段・Home 巻末で使う「目次」スタイルのリンク一覧（adr/0008 追記2）。
+// 白カード・角丸ボックス・文書用 h2（緑バー）は使わず、罫線と点線リーダーだけで組む。
+export interface DocIndexItem {
+  href: string;
+  title: string;
+  desc?: string;
+  external?: boolean;
+}
+
+export interface Props {
+  label: string;
+  items: DocIndexItem[];
+}
+
+const { label, items } = Astro.props;
+---
+
+<div class="doc-index">
+  <p class="doc-index__label label-hand">{label}</p>
+  <ul class="doc-index__list">
+    {items.map((item) => (
+      <li>
+        <a
+          class="doc-index__row"
+          href={item.href}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noopener' : undefined}
+        >
+          <span class="doc-index__title">{item.title}</span>
+          <span class="doc-index__leader" aria-hidden="true"></span>
+          <span class="doc-index__meta">
+            {item.desc && <span class="doc-index__desc">{item.desc}</span>}
+            <span class="doc-index__arrow" aria-hidden="true">→</span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .doc-index {
+    max-width: 40rem;
+  }
+  .doc-index__label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .doc-index__label::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid var(--rule);
+  }
+  .doc-index__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-index__row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .doc-index__title {
+    font-weight: 500;
+  }
+  .doc-index__leader {
+    align-self: end;
+    margin-bottom: 0.35em;
+    border-bottom: 1px dotted var(--line);
+  }
+  .doc-index__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .doc-index__arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .doc-index__row:hover .doc-index__title {
+    color: var(--brand);
+  }
+  .doc-index__row:hover .doc-index__arrow {
+    transform: translateX(4px);
+  }
+  @media (max-width: 40rem) {
+    .doc-index__row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+    .doc-index__leader {
+      display: none;
+    }
+    .doc-index__meta {
+      white-space: normal;
+    }
+  }
+</style>

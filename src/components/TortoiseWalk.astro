@@ -1,6 +1,7 @@
 ---
-// ヘッダー直下の細いトラックを、スクロール進捗に応じてカメが歩く演出（adr/0008・Home 専用）。
-// 遊びはサイト内でここ 1 箇所に限定する。
+// ヘッダー下端に重ねたトラックを、スクロール進捗に応じてカメが歩く演出（adr/0008・Home 専用）。
+// 遊びはサイト内でここ 1 箇所に限定する。sticky ヘッダー（position:sticky の .site-header）の
+// 内側に置く前提で、トラックはヘッダーの下端に絶対配置してスクロール追従させる（adr/0008 追記2）。
 ---
 
 <div class="tortoise-track" aria-hidden="true">
@@ -18,7 +19,10 @@
 
 <style>
   .tortoise-track {
-    position: relative;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
     height: 3px;
     background: var(--rule);
   }

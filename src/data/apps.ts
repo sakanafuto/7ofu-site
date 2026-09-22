@@ -4,11 +4,17 @@
 import type { Lang } from '../i18n/ui';
 
 export type AppSlug = 'koura' | 'schemely' | 'kamekoro';
-export type AppStatus = 'live' | 'soon';
+/** Home での扱い。'spread' は見開き、'note' は巻末手前の余白メモ（adr/0008 追記2）。 */
+export type HomeLayout = 'spread' | 'note';
 
 export interface AppShot {
   src: string;
   alt: string;
+}
+
+export interface AppStores {
+  ios?: string;
+  android?: string;
 }
 
 interface AppSpecimen {
@@ -33,13 +39,14 @@ interface AppCopy {
 
 interface AppEntry {
   slug: AppSlug;
-  no: string;
+  /** 見開きの通し番号。余白メモ（Schemely）は番号を持たない。 */
+  no?: string;
+  homeLayout: HomeLayout;
   icon: string;
   accentVar: string;
   tintVar: string;
-  storeUrl: string;
+  stores: AppStores;
   hubPath: string;
-  status: AppStatus;
   ja: AppCopy;
   en: AppCopy;
 }
@@ -47,13 +54,13 @@ interface AppEntry {
 /** Spread / LP Hero が実際に受け取る、locale で解決済みのビュー。 */
 export interface AppView {
   slug: AppSlug;
-  no: string;
+  no?: string;
+  homeLayout: HomeLayout;
   icon: string;
   accentVar: string;
   tintVar: string;
-  storeUrl: string;
+  stores: AppStores;
   hubPath: string;
-  status: AppStatus;
   name: string;
   tagline: string;
   specimen: AppSpecimen;
@@ -65,19 +72,22 @@ const entries: AppEntry[] = [
   {
     slug: 'koura',
     no: '01',
+    homeLayout: 'spread',
     icon: '/koura-diary.svg',
     accentVar: '--acc-koura',
     tintVar: '--tint-koura',
-    storeUrl: 'https://apps.apple.com/app/id6783813983',
+    stores: {
+      ios: 'https://apps.apple.com/app/id6783813983',
+      android: 'https://play.google.com/store/apps/details?id=com.togawa.tortoise_log',
+    },
     hubPath: '/koura-diary/',
-    status: 'live',
     ja: {
       name: 'こうら日記',
       tagline: 'リクガメの毎日を、写真と体重グラフで記録するフィールドノート。',
       specimen: {
         subject: 'リクガメ（陸生種）',
-        habitat: 'iPhone / iPad',
-        status: '生息中・App Store で配布中',
+        habitat: 'iPhone / iPad / Android',
+        status: '生息中・App Store / Google Play で配布中',
       },
       features: ['写真つきの毎日の記録', '体重グラフとカレンダー', '家族と共有・みんなのこうら'],
       shots: [
@@ -91,8 +101,8 @@ const entries: AppEntry[] = [
       tagline: 'A field notebook for your tortoise — daily photos and a weight graph.',
       specimen: {
         subject: 'Tortoises (terrestrial species)',
-        habitat: 'iPhone / iPad',
-        status: 'In the wild — on the App Store',
+        habitat: 'iPhone / iPad / Android',
+        status: 'In the wild — on the App Store / Google Play',
       },
       features: [
         'Daily logs with photos',
@@ -108,13 +118,14 @@ const entries: AppEntry[] = [
   },
   {
     slug: 'schemely',
-    no: '02',
+    homeLayout: 'note',
     icon: '/schemely.svg',
     accentVar: '--acc-schemely',
     tintVar: '--tint-schemely',
-    storeUrl: 'https://apps.apple.com/app/id6788003083',
+    stores: {
+      ios: 'https://apps.apple.com/app/id6788003083',
+    },
     hubPath: '/schemely/',
-    status: 'live',
     ja: {
       name: 'Schemely',
       tagline: '任意の URL をタップできるリンクに変え、Deep Link の挙動を確かめる検証ノート。',
@@ -154,13 +165,15 @@ const entries: AppEntry[] = [
   },
   {
     slug: 'kamekoro',
-    no: '03',
+    no: '02',
+    homeLayout: 'spread',
     icon: '/kamekoro.png',
     accentVar: '--acc-kamekoro',
     tintVar: '--tint-kamekoro',
-    storeUrl: 'https://apps.apple.com/jp/app/%E3%82%AB%E3%83%A1%E3%82%B3%E3%83%AD/id6789081791',
+    stores: {
+      ios: 'https://apps.apple.com/jp/app/%E3%82%AB%E3%83%A1%E3%82%B3%E3%83%AD/id6789081791',
+    },
     hubPath: '/kamekoro/',
-    status: 'live',
     ja: {
       name: 'カメコロ',
       tagline: '爬虫類たちに餌をあげる、コンボ狙いの給餌パズル観察日記。',
@@ -195,12 +208,12 @@ function toView(entry: AppEntry, lang: Lang): AppView {
   return {
     slug: entry.slug,
     no: entry.no,
+    homeLayout: entry.homeLayout,
     icon: entry.icon,
     accentVar: entry.accentVar,
     tintVar: entry.tintVar,
-    storeUrl: entry.storeUrl,
+    stores: entry.stores,
     hubPath: entry.hubPath,
-    status: entry.status,
     name: copy.name,
     tagline: copy.tagline,
     specimen: copy.specimen,

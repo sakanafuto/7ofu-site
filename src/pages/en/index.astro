@@ -1,10 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Spread from '../../components/Spread.astro';
+import MarginNote from '../../components/MarginNote.astro';
+import DocIndex from '../../components/DocIndex.astro';
 import { getApps } from '../../data/apps';
 
 const lang = 'en';
 const apps = getApps(lang);
+// Home は主役 2 アプリ（こうら日記・カメコロ）だけ見開きにする。Schemely は巻末手前の余白メモ
+// として軽く置く（開発者向けツールを同じ粒度で並べると主役がぼける・adr/0008 追記2）。
+const spreadApps = apps.filter((app) => app.homeLayout === 'spread');
+const noteApps = apps.filter((app) => app.homeLayout === 'note');
+
+const colophonItems = [
+  {
+    href: 'https://x.com/KouraDiary',
+    title: 'X (formerly Twitter)',
+    desc: '@KouraDiary — updates and notes.',
+    external: true,
+  },
+  {
+    href: '/en/contact/',
+    title: 'Contact',
+    desc: 'Get in touch with feedback or questions.',
+  },
+];
 ---
 
 <BaseLayout title="7ofu" width="wide" tortoise>
@@ -16,7 +36,7 @@ const apps = getApps(lang);
   </section>
 
   {
-    apps.map((app, index) => (
+    spreadApps.map((app, index) => (
       <Spread
         app={app}
         lang={lang}
@@ -28,16 +48,10 @@ const apps = getApps(lang);
     ))
   }
 
+  {noteApps.map((app) => <MarginNote app={app} lang={lang} />)}
+
   <section class="colophon">
-    <h2 class="colophon__label">Endnotes</h2>
-    <ul class="colophon__list">
-      <li>
-        <a href="https://x.com/KouraDiary" target="_blank" rel="noopener">
-          <strong>X (formerly Twitter)</strong>
-          <small>@KouraDiary — updates and notes.</small>
-        </a>
-      </li>
-    </ul>
+    <DocIndex label="Endnotes" items={colophonItems} />
   </section>
 
   <style>
@@ -90,40 +104,8 @@ const apps = getApps(lang);
 
     .colophon {
       margin-top: 2.5rem;
-      padding-top: 2.5rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--rule);
-    }
-    .colophon__label {
-      margin: 0 0 1.25rem;
-      font-size: 1rem;
-      color: var(--muted);
-      border: none;
-      padding: 0;
-    }
-    .colophon__list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.85rem;
-      max-width: 26rem;
-    }
-    .colophon__list a {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      padding: 1rem 1.15rem;
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--fg);
-      transition: border-color 0.15s ease;
-    }
-    .colophon__list a:hover {
-      border-color: var(--brand);
-    }
-    .colophon__list small {
-      color: var(--muted);
     }
   </style>
 </BaseLayout>

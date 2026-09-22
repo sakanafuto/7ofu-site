@@ -34,6 +34,7 @@ const nav = [
   { href: localizePath('/kamekoro/', lang), label: t('nav.kamekoro') },
   // ブログは ja のみ。en 記事が出たら en ナビにも出す（ui.ts の jaOnlyPrefixes と対で更新する）
   ...(lang === 'ja' ? [{ href: '/blog/', label: t('nav.blog') }] : []),
+  { href: localizePath('/contact/', lang), label: t('nav.contact') },
 ];
 const otherLang = lang === 'ja' ? 'en' : 'ja';
 // en 版が無いページ（ブログ等）では別 locale の同一ページが存在しないため、
@@ -143,11 +144,17 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         }
       }
       .site-header {
-        border-bottom: 1px solid var(--line);
-        background: color-mix(in srgb, var(--bg) 80%, white);
         position: sticky;
         top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 80%, white);
         backdrop-filter: blur(6px);
+      }
+      /* カメのトラックがヘッダー下端の境界線を兼ねるため、通常の border-bottom は消す
+         （両方あると二重線になる・adr/0008 追記2）。 */
+      .site-header--tortoise {
+        border-bottom: none;
       }
       .site-header .container {
         display: flex;
@@ -199,13 +206,17 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
           padding-block: 0.55rem;
           min-height: 0;
         }
+        /* nav は nowrap の項目 6 つで 360px を超える。折り返しを許さないと .container が
+           viewport より広くなり、ページ全体に横スクロールが出る。 */
         .site-nav {
           order: 1;
           flex-basis: 100%;
+          flex-wrap: wrap;
           justify-content: center;
-          gap: 1.25rem;
+          gap: 0.35rem 1rem;
           margin-inline-start: 0;
         }
+        .site-nav a { font-size: 0.9rem; }
         .lang-switch { margin-inline-start: auto; }
       }
       main { padding-block: 4rem 6rem; }
@@ -222,6 +233,17 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
         justify-content: space-between;
         gap: 1rem;
       }
+      .footer-left {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .footer-contact {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+      }
+      .footer-contact:hover { color: var(--brand); }
       .footer-x {
         display: inline-flex;
         align-items: center;
@@ -243,7 +265,7 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
     </style>
   </head>
   <body>
-    <header class="site-header">
+    <header class:list={['site-header', { 'site-header--tortoise': tortoise }]}>
       <div class="container">
         <a href={localizePath('/', lang)} class="brand">7ofu</a>
         <nav class="site-nav">
@@ -273,8 +295,8 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
           <span>{languageShort[otherLang]}</span>
         </a>
       </div>
+      {tortoise && <TortoiseWalk />}
     </header>
-    {tortoise && <TortoiseWalk />}
     <main>
       <div class:list={['container', { 'container--wide': width === 'wide' }]}>
         <slot />
@@ -282,7 +304,10 @@ const enHref = new URL(alternatePath(Astro.url.pathname, 'en'), Astro.site).href
     </main>
     <footer class="site-footer">
       <div class="container footer-inner">
-        <span>© 2026 7ofu</span>
+        <span class="footer-left">
+          <span>© 2026 7ofu</span>
+          <a class="footer-contact" href={localizePath('/contact/', lang)}>{t('nav.contact')}</a>
+        </span>
         <a
           class="footer-x"
           href="https://x.com/KouraDiary"

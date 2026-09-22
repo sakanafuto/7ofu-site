@@ -1,10 +1,15 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Spread from '../../../components/Spread.astro';
+import DocIndex from '../../../components/DocIndex.astro';
 import { getApp } from '../../../data/apps';
 
 const lang = 'en';
 const app = getApp('koura', lang);
+
+const howto = [
+  { href: '/en/koura-diary/help', title: 'How to use / Help', desc: 'Recording, family sharing, backup, and more' },
+];
 
 const docs = [
   { href: '/en/koura-diary/terms', title: 'Terms of Use', desc: 'Conditions for using the app' },
@@ -18,55 +23,16 @@ const docs = [
   <p class="crumb"><a href="/en/">Home</a> / Koura Diary</p>
   <Spread app={app} lang={lang} index={0} standalone eager />
 
-  <section>
-    <h2>How to use</h2>
-    <ul class="doclist">
-      <li>
-        <a href="/en/koura-diary/help">
-          <strong>How to use / Help</strong>
-          <small>Recording, family sharing, backup, and more</small>
-        </a>
-      </li>
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="How to use" items={howto} />
   </section>
 
-  <section>
-    <h2>Terms &amp; Policies</h2>
-    <ul class="doclist">
-      {docs.map((d) => (
-        <li>
-          <a href={d.href}>
-            <strong>{d.title}</strong>
-            <small>{d.desc}</small>
-          </a>
-        </li>
-      ))}
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="Terms & Policies" items={docs} />
   </section>
 
   <style>
     .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
-    .doclist {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      max-width: 40rem;
-      display: grid;
-      gap: 1rem;
-    }
-    .doclist a {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding: 1.15rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: white;
-      text-decoration: none;
-      color: var(--fg);
-      transition: border-color 0.15s ease;
-    }
-    .doclist a:hover { border-color: var(--brand); }
-    .doclist small { color: var(--muted); }
+    .doc-section { margin-top: 3rem; }
   </style>
 </BaseLayout>
