@@ -1,0 +1,105 @@
+---
+// 「余白のメモ」— Home で見開きにしない開発者向けアプリを軽く添える（adr/0008 追記2）。
+import { localizePath } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import type { AppView } from '../data/apps';
+
+export interface Props {
+  app: AppView;
+  lang: Lang;
+}
+
+const { app, lang } = Astro.props;
+
+const strings = {
+  ja: { tag: '開発者向け', cta: 'App Store ↗', more: '詳しく →' },
+  en: { tag: 'For developers', cta: 'App Store ↗', more: 'Learn more →' },
+} as const;
+const s = strings[lang];
+---
+
+<aside
+  class="margin-note reveal"
+  style={`--accent: var(${app.accentVar});`}
+  aria-labelledby={`margin-note-${app.slug}-title`}
+>
+  <p class="margin-note__label label-hand">余白のメモ / Margin note</p>
+  <div class="margin-note__row">
+    <img class="margin-note__icon" src={app.icon} alt="" width="28" height="28" />
+    <h2 id={`margin-note-${app.slug}-title`} class="margin-note__name">
+      {app.name}
+      <span class="margin-note__tag">{s.tag}</span>
+    </h2>
+  </div>
+  <p class="margin-note__tagline">{app.tagline}</p>
+  <div class="margin-note__links">
+    {app.stores.ios && (
+      <a href={app.stores.ios} target="_blank" rel="noopener">
+        {s.cta}
+      </a>
+    )}
+    <a href={localizePath(app.hubPath, lang)}>{s.more}</a>
+  </div>
+</aside>
+
+<style>
+  .margin-note {
+    max-width: 40rem;
+    margin-block: 1rem 0;
+    padding-block: 1.5rem 0.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  .margin-note__label {
+    margin: 0 0 0.6rem;
+    font-size: 1rem;
+    color: var(--muted);
+  }
+  .margin-note__row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .margin-note__icon {
+    border-radius: 7px;
+    flex: none;
+  }
+  /* h2 だがグローバルの文書用見出し（緑バー・大きめ余白）は継承させない。 */
+  .margin-note__name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .margin-note__tag {
+    padding: 0.1rem 0.55rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  .margin-note__tagline {
+    margin: 0 0 0.85rem;
+    color: var(--fg);
+    font-size: 0.95rem;
+  }
+  .margin-note__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+  }
+  .margin-note__links a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .margin-note__links a:hover {
+    text-decoration: underline;
+  }
+</style>

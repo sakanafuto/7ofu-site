@@ -9,15 +9,16 @@
 |---|---|---|---|
 | F1 | Home（つくったもの一覧） | `/` | ✅ |
 | F2 | 共通レイアウト（BaseLayout / DocLayout） | `src/layouts/` | ✅ |
-| F3 | こうら日記 ランディング＋規約一式 | `/koura-diary/*` | ✅（iOS 公開済み） |
-| F4 | Schemely ランディング＋規約一式 | `/schemely/*` | 🚧（iOS 準備中） |
-| F5 | 問い合わせフォーム（Web3Forms） | `/<app>/contact` | ✅ |
+| F3 | こうら日記 ランディング＋規約一式 | `/koura-diary/*` | ✅ iOS/Android 公開済み |
+| F4 | Schemely ランディング＋規約一式 | `/schemely/*` | ✅ iOS 公開済み |
+| F5 | 問い合わせフォーム（Web3Forms） | `/<app>/contact`・`/contact` | ✅ |
 | F6 | 英語対応（i18n・ja ルート + /en/） | `/en/**` | ✅ |
-| F7 | カメコロ ランディング＋規約一式＋通報導線 | `/kamekoro/*` | 🚧（iOS 準備中） |
+| F7 | カメコロ ランディング＋規約一式＋通報導線 | `/kamekoro/*` | ✅ iOS 公開済み |
 
 ## F1 Home
-- 「つくったもの」をカードで一覧。各アプリの `/<app>/` へリンク。
-- 受入: 公開済みアプリと準備中アプリが判別できる（準備中バッジ）。
+- 観察ノートのモチーフ（adr/0008）。主役 2 アプリ（こうら日記・カメコロ）は見開き（Spread）、
+  Schemely は開発者向けツールのため巻末手前の余白メモ（MarginNote）として軽く置く。
+- 受入: Home は主役 2 アプリの見開き＋Schemely の余白メモで構成され、各アプリの `/<app>/` へ導線がある。
 
 ## F2 共通レイアウト
 - `BaseLayout.astro`: `<head>`・ヘッダー nav・フッター・デザイントークン（`--brand` 等）。
@@ -26,21 +27,24 @@
 - 受入: 新規アプリの規約ページが frontmatter 指定だけで正しいパンくず／タイトルになる。
 
 ## F3 こうら日記（リクガメ飼育記録アプリ・tortoise_log）
-- ランディング（App Store 導線・Android テスター募集）／使い方／利用規約／
+- ランディング（App Store・Google Play 導線）／使い方／利用規約／
   プライバシー／免責事項／問い合わせ／サンクス。
-- 受入: App Store リンクが有効。規約 3 種が DocLayout で表示される。
+- 受入: App Store・Google Play リンクが有効。規約 3 種が DocLayout で表示される。
 
 ## F4 Schemely（Deep Link 検証ツール・deeptap）
-- ランディング（iOS 準備中表記）／利用規約／プライバシー／問い合わせ／サンクス。
+- ランディング（App Store 導線）／利用規約／プライバシー／問い合わせ／サンクス。
 - 規約・プライバシーは実アプリ機能（QR 生成・写真保存・Buy Me a Coffee 応援）と整合。
-- 受入: iOS 公開時に「準備中」→ App Store 導線へ差し替えられる構成。
-- 残: 紹介文への機能追記（Issue #1）。
+- 受入: App Store 導線が有効。
 
 ## F5 問い合わせフォーム（Web3Forms）
 - `action=https://api.web3forms.com/submit` に POST。hidden で access key・subject・
   from_name・redirect（`https://7ofu.dev/<app>/thanks`）。種別 select ＋ 名前 / メール / 本文。
 - スパム対策: ハニーポット（`botcheck`）。→ adr/0002
 - 受入: 送信で登録メールに届き、`/<app>/thanks` に遷移する。
+- サイト共通の `/contact`・`/en/contact`（adr/0008 追記2）: `/<app>/contact` とは別に、
+  対象アプリ（こうら日記／Schemely／カメコロ／サイト・その他）を選ぶ select を持つ。
+  subject は `7ofu.dev お問い合わせ`（en は ` (EN)` 付き）で統一。`/<app>/contact` は
+  ストア掲載のサポート URL として参照されているため残す（削除・リダイレクトしない）。
 
 ## F6 英語対応（i18n）
 - Astro ネイティブ i18n。ja をルート維持、en を `/en/` 配下（`prefixDefaultLocale:false`）。→ adr/0004
@@ -51,7 +55,7 @@
 - **新ページは ja と en の両方を用意する**（片方だけだとスイッチャがリンク切れ）。
 
 ## F7 カメコロ（爬虫類の給餌パズルゲーム・kamekoro）
-- ランディング（iOS 準備中表記）／利用規約／プライバシー／問い合わせ／サンクス（ja/en）。
+- ランディング（App Store 導線）／利用規約／プライバシー／問い合わせ／サンクス（ja/en）。
 - プライバシーはアプリ側の canonical 原稿（`~/w/kamekoro/docs/privacy/`）を文面変更なしで移植。
   ランキング（Firebase）・匿名認証・IAP・COPPA 配慮を含む。`updated: 2026-07-11`（原稿準拠）。
 - 利用規約はニックネーム禁止事項＋開発者の削除権（App Store 審査 1.2 対応）、IAP＝コスメティックのみ・
@@ -60,8 +64,8 @@
 - 問い合わせは種別に「ニックネームの通報 / Report a nickname」を追加（審査 1.2 の通報導線）。
 - 公開参照 URL（kamekoro 側が確定参照）: `https://7ofu.dev/kamekoro/privacy`（アプリ内・App Store Connect）、
   `https://7ofu.dev/kamekoro/contact`（App Store Connect サポート URL）。
-- 受入: 上記 URL がビルドで到達可。App Store 公開時に「準備中」→ App Store 導線へ差し替え。
-- 残: App Store リンク差し替え（公開後）。アイコンは `public/kamekoro.png`（1024²→192 に縮小）。
+- 受入: 上記 URL がビルドで到達可。App Store 導線が有効。
+- アイコンは `public/kamekoro.png`（1024²→192 に縮小）。
 
 ## スコープ外（現時点）
 - ブログ / 記事機能、英語以外の言語、アクセス解析、認証。

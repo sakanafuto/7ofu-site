@@ -1,0 +1,332 @@
+---
+// 観察ノートの「見開き」1 枚（adr/0008）。Home の一覧・アプリ LP の Hero で共用する。
+import { localizePath } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import type { AppView } from '../data/apps';
+
+export interface Props {
+  app: AppView;
+  lang: Lang;
+  index: number;
+  reverse?: boolean;
+  standalone?: boolean;
+  eager?: boolean;
+  /** 写真の掲載枚数の上限。省略時は全枚数（LP Hero 用）。Home は 2 に絞る（adr/0008 追記）。 */
+  maxShots?: number;
+}
+
+const {
+  app,
+  lang,
+  index,
+  reverse = false,
+  standalone = false,
+  eager = false,
+  maxShots,
+} = Astro.props;
+// standalone（アプリ自身の LP）では紙面をめくる演出を持たないため、常に写真→ノートの順で固定する。
+const effectiveReverse = standalone ? false : reverse;
+const shots = typeof maxShots === 'number' ? app.shots.slice(0, maxShots) : app.shots;
+// standalone（アプリ自身の LP の Hero）ではページの h1 として、Home の一覧では h2 として出す
+// （ページごとに h1 を 1 つに保つ・adr/0008 追記）。
+const Heading = standalone ? 'h1' : 'h2';
+
+const strings = {
+  ja: {
+    subject: '観察対象',
+    habitat: '生息地',
+    state: '状態',
+    ctaIos: 'App Store で入手 ↗',
+    ctaAndroid: 'Google Play で入手 ↗',
+    soon: '近日公開',
+    more: '詳しく →',
+  },
+  en: {
+    subject: 'Subject',
+    habitat: 'Habitat',
+    state: 'Status',
+    ctaIos: 'App Store ↗',
+    ctaAndroid: 'Google Play ↗',
+    soon: 'Coming soon',
+    more: 'Learn more →',
+  },
+} as const;
+const s = strings[lang];
+
+// ストア用スクショは幅 640 固定。高さはアプリごとの実寸（img の width/height で CLS を防ぐ）。
+const shotDims: Record<AppView['slug'], { w: number; h: number }> = {
+  koura: { w: 640, h: 1386 },
+  schemely: { w: 640, h: 1391 },
+  kamekoro: { w: 640, h: 1330 },
+};
+const dims = shotDims[app.slug];
+
+// 複数枚を軽く傾けて散らした「写真プリント」に見せるための角度のバリエーション。
+const rotations = [-2, 2.4, -1.4] as const;
+---
+
+<section
+  class:list={['spread', { 'spread--reverse': effectiveReverse, 'spread--standalone': standalone }]}
+  style={`--accent: var(${app.accentVar}); --tint: var(${app.tintVar}); --i: ${index};`}
+  aria-labelledby={`spread-${app.slug}-title`}
+>
+  <div class="spread__grid reveal">
+    <div class="spread__photos">
+      {shots.map((shot, shotIndex) => (
+        <figure
+          class="spread__photo"
+          style={`--r: ${rotations[shotIndex % rotations.length]}deg;`}
+        >
+          <span class="spread__tape spread__tape--left" aria-hidden="true"></span>
+          <span class="spread__tape spread__tape--right" aria-hidden="true"></span>
+          <img
+            src={shot.src}
+            alt={shot.alt}
+            width={dims.w}
+            height={dims.h}
+            loading={eager && shotIndex === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </figure>
+      ))}
+    </div>
+
+    <div class="spread__note">
+      {app.no && <p class="spread__label label-hand">No.{app.no}</p>}
+      <Heading id={`spread-${app.slug}-title`} class="spread__name">
+        <img class="spread__icon" src={app.icon} alt="" width="32" height="32" />
+        {app.name}
+      </Heading>
+      <p class="spread__tagline">{app.tagline}</p>
+      <dl class="spread__specimen">
+        <div>
+          <dt>{s.subject}</dt>
+          <dd>{app.specimen.subject}</dd>
+        </div>
+        <div>
+          <dt>{s.habitat}</dt>
+          <dd>{app.specimen.habitat}</dd>
+        </div>
+        <div>
+          <dt>{s.state}</dt>
+          <dd>{app.specimen.status}</dd>
+        </div>
+      </dl>
+      <ul class="spread__features">
+        {app.features.map((feature) => <li>{feature}</li>)}
+      </ul>
+      <div class="spread__cta">
+        {app.stores.ios && (
+          <a class="spread__store spread__store--ios" href={app.stores.ios} target="_blank" rel="noopener">
+            {s.ctaIos}
+          </a>
+        )}
+        {app.stores.android && (
+          <a
+            class="spread__store spread__store--android"
+            href={app.stores.android}
+            target="_blank"
+            rel="noopener"
+          >
+            {s.ctaAndroid}
+          </a>
+        )}
+        {!app.stores.ios && !app.stores.android && (
+          <span class="spread__store spread__store--soon">{s.soon}</span>
+        )}
+        {!standalone && (
+          <a class="spread__more" href={localizePath(app.hubPath, lang)}>
+            {s.more}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .spread {
+    padding-block: 2.5rem;
+  }
+  .spread + .spread {
+    border-top: 1px solid var(--rule);
+  }
+  .spread__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 52rem) {
+    .spread__grid {
+      grid-template-columns: 5fr 7fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+    .spread--reverse .spread__grid {
+      grid-template-columns: 7fr 5fr;
+    }
+    .spread--reverse .spread__photos {
+      order: 2;
+    }
+    .spread--reverse .spread__note {
+      order: 1;
+    }
+  }
+
+  .spread__photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.25rem 0.75rem;
+    background: var(--tint);
+    border-radius: 18px;
+    padding: 2rem 1.25rem;
+  }
+  .spread__photo {
+    position: relative;
+    margin: 0;
+    width: min(46%, 12rem);
+    background: white;
+    padding: 8px;
+    border-radius: 2px;
+    box-shadow: 0 8px 18px rgba(44, 44, 44, 0.16);
+    transform: rotate(var(--r, -2deg));
+  }
+  .spread__photo:only-child {
+    width: min(70%, 15rem);
+  }
+  .spread__photo:nth-child(2) {
+    margin-top: 1.5rem;
+  }
+  .spread__photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1px;
+  }
+  .spread__tape {
+    position: absolute;
+    top: -10px;
+    width: 34px;
+    height: 16px;
+    background: color-mix(in srgb, var(--accent) 55%, white);
+    opacity: 0.7;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  }
+  .spread__tape--left {
+    left: 6%;
+    transform: rotate(-8deg);
+  }
+  .spread__tape--right {
+    right: 6%;
+    transform: rotate(7deg);
+  }
+
+  .spread__label {
+    margin: 0 0 0.35rem;
+    font-size: 1.15rem;
+    color: var(--accent);
+  }
+  .spread__name {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  .spread__icon {
+    border-radius: 9px;
+    flex: none;
+  }
+  .spread__tagline {
+    margin: 0 0 1.5rem;
+    color: var(--fg);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  .spread__specimen {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .spread__specimen div {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+  .spread__specimen dt {
+    flex: none;
+    width: 5.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .spread__specimen dd {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .spread__features {
+    margin: 0 0 1.75rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .spread__features li {
+    padding-left: 1.3rem;
+    position: relative;
+    font-size: 0.95rem;
+  }
+  .spread__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .spread__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .spread__store {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .spread__store--android {
+    background: transparent;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .spread__store--soon {
+    background: var(--paper-2);
+    color: var(--muted);
+  }
+  .spread__more {
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .spread__more:hover {
+    text-decoration: underline;
+  }
+</style>

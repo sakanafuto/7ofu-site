@@ -1,112 +1,36 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Spread from '../../../components/Spread.astro';
+import DocIndex from '../../../components/DocIndex.astro';
+import { getApp } from '../../../data/apps';
+
+const lang = 'en';
+const app = getApp('schemely', lang);
+
 const docs = [
   { href: '/en/schemely/terms', title: 'Terms of Use', desc: 'Conditions for using the app' },
   { href: '/en/schemely/privacy', title: 'Privacy Policy', desc: 'How your data is handled (no data collection)' },
 ];
+
+const contact = [
+  { href: '/en/schemely/contact', title: 'Contact form', desc: 'Requests, bug reports, and more' },
+];
 ---
 
-<BaseLayout title="Schemely | 7ofu" description="Schemely terms and policies">
-  <section class="intro">
-    <p class="crumb"><a href="/en/">Home</a> / Schemely</p>
-    <h1 class="title">
-      <img src="/schemely.svg" alt="" width="40" height="40" />
-      Schemely
-    </h1>
-    <p class="lead">
-      A developer tool that turns text into tappable links and lets you check how
-      deep links (URL schemes / Universal Links) actually behave when tapped.
-    </p>
+<BaseLayout title="Schemely | 7ofu" description="Schemely terms and policies" width="wide">
+  <p class="crumb"><a href="/en/">Home</a> / Schemely</p>
+  <Spread app={app} lang={lang} index={0} standalone eager />
+
+  <section class="doc-section">
+    <DocIndex label="Terms & Policies" items={docs} />
   </section>
 
-  <section>
-    <h2>Download</h2>
-    <div class="stores">
-      <a class="store store--live" href="https://apps.apple.com/app/id6788003083">
-        <span class="store__os">iOS</span>
-        <strong class="store__state">Get it on the App Store</strong>
-        <small>iPhone · iOS 18 or later</small>
-      </a>
-    </div>
-  </section>
-
-  <section>
-    <h2>Terms &amp; Policies</h2>
-    <ul class="doclist">
-      {docs.map((d) => (
-        <li>
-          <a href={d.href}>
-            <strong>{d.title}</strong>
-            <small>{d.desc}</small>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  <section>
-    <h2>Contact</h2>
-    <ul class="doclist">
-      <li>
-        <a href="/en/schemely/contact">
-          <strong>Contact form</strong>
-          <small>Requests, bug reports, and more</small>
-        </a>
-      </li>
-    </ul>
+  <section class="doc-section">
+    <DocIndex label="Contact" items={contact} />
   </section>
 
   <style>
-    .intro { margin-bottom: 1rem; }
     .crumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
-    .title { display: flex; align-items: center; gap: 0.65rem; }
-    .title img { border-radius: 9px; }
-    .lead { color: var(--muted); line-height: 1.75; }
-    .doclist {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 1rem;
-    }
-    .doclist a {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding: 1.15rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: white;
-      text-decoration: none;
-      color: var(--fg);
-      transition: border-color 0.15s ease;
-    }
-    .doclist a:hover { border-color: var(--brand); }
-    .doclist small { color: var(--muted); }
-
-    .stores {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(14rem, 20rem));
-      gap: 1rem;
-    }
-    .store {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      padding: 1.25rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: white;
-    }
-    .store--wip { background: #f7f4ec; }
-    .store--live { color: var(--fg); text-decoration: none; transition: border-color 0.15s ease; }
-    .store--live:hover { border-color: var(--brand); }
-    .store__os {
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-    .store__state { font-size: 1.05rem; }
-    .store small { color: var(--muted); }
+    .doc-section { margin-top: 3rem; }
   </style>
 </BaseLayout>
