@@ -23,4 +23,5 @@
 - 新ページは ja/en 両方作る。ja 専用は `jaOnlyPrefixes` に登録
 - スクショ差し替え: 各アプリ repo の `screenshots/raw`（カメコロは `docs/store/screenshots`）から
   `cwebp -q 82 -resize 640 0` で `public/shots/<app>/<lang>-<name>.webp` へ。寸法を変えたら `Spread.astro` の `shotDims` も更新
-- ヘッドレス Chrome で確認するときは `--force-prefers-reduced-motion` を付ける（IO 演出が撮影前に発火しない）
+- ヘッドレス Chrome（`--headless=new --virtual-time-budget=8000`）で出現演出込みの表示が撮れる。
+  **見えないときは演出のバグを疑う**（`--force-prefers-reduced-motion` で回避すると c14899a の詳細度バグを見逃す）
