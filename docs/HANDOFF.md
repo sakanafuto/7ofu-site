@@ -1,29 +1,23 @@
-# HANDOFF（最終更新: 2026-09-22）
+# HANDOFF（最終更新: 2026-09-30）
 
 ## 現在地
-- ブランチ: `feat/home-redesign-fieldnote`（bde15ff）→ **PR #26 レビュー待ち**／ main は ced9a63（PR #25 まで）
+- main は e3efc54（PR #26 Home リデザインまでマージ済み）。作業ブランチ: `docs/claude-md-sync`（CLAUDE.md を実装に同期）
 - リモート: `github.com/sakanafuto/7ofu-site`
 
 ## 直前に完了したこと
-- **Home リデザイン（ADR-0008）**: 「観察ノート」モチーフ。表紙（罫線紙・大きな 7ofu）＋見開き `Spread.astro`
-  （スクショの写真プリント＋ノート）×3 ＋巻末。ヘッダー直下にスクロールで歩くカメ（Home のみ）。
-  3 アプリ LP（ja/en）の Hero も同じ Spread（standalone・h1）。`src/data/apps.ts` にコピー/URL/スクショを一元化
-- レビュー反映: LP の h1 欠落・アクセント色の 4.5:1 未満を修正（ADR-0008 追記）。build 41 ページ green
-- 前段: こうら日記のプライバシー・規約更新（PR #22〜#25）
+- **CLAUDE.md を実装に同期**: 3 アプリ・`/api/like` Worker・`components/` `data/apps.ts` `i18n` `content/blog` を反映。
+  恒久的な注意点（sandbox・`--body-file`・ja/en 両方作る・スクショ手順）を HANDOFF から CLAUDE.md へ移管
+- **Home リデザイン（ADR-0008）** PR #26 マージ済み。「観察ノート」モチーフ・`Spread.astro`・カメ・`apps.ts` 一元化
+- グローバル `~/.claude` の整理（skills 168→10・agents 38→5・CLAUDE.md 81→47 行）。理由と経緯は本 repo の外
 
 ## 次のアクション
-- PR #26 をマージ → `npx wrangler deploy` → 実機で出現演出・カメ・フォント読込を確認
+- `npx wrangler deploy`（未実施なら）→ 実機で出現演出・カメ・フォント読込を確認
 - こうら日記 v1.13 配信後: プライバシーポリシーに「ひとことの機械翻訳」「運営の Slack への通知」を一文ずつ追加（ja/en）
 - 残: Issue #1（Schemely 紹介文の追記）— apps.ts の features に反映する形で
 
 ## ブロッカー・注意点
-- この repo は tortoise_log セッションから触る場合サンドボックスの書き込み許可外 → git/npm/cwebp は sandbox 無効で実行
-- gh / push はサンドボックス無効で実行（TLS 検証が sandbox 内で失敗する）
-- main 直コミットは hook でブロック → HANDOFF も branch → PR 経由。PR 本文は `--body-file`
-- 新ページは ja/en 両方作る。ja 専用は `jaOnlyPrefixes` に登録
-- スクショ差し替え: 各アプリ repo の `screenshots/raw`（カメコロは `docs/store/screenshots`）から
-  `cwebp -q 82 -resize 640 0` で `public/shots/<app>/<lang>-<name>.webp` へ。寸法を変えたら `Spread.astro` の `shotDims` も更新
 - ヘッドレス Chrome（`--headless=new --virtual-time-budget=8000`）で出現演出込みの表示が撮れる。
   **見えないときは演出のバグを疑う**（`--force-prefers-reduced-motion` で回避すると c14899a の詳細度バグを見逃す）
 - モバイル幅の確認は `--window-size=360,...` では**不正確**（Chrome の最小ウィンドウ幅でビューポートが広がり右端が切れて見える）。
   幅 360px の `<iframe>` を並べたローカル HTML を撮る（scratchpad の frame.html 方式）
+- スクショの元画像: 各アプリ repo の `screenshots/raw`（カメコロは `docs/store/screenshots`）
