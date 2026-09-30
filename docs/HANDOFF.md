@@ -1,12 +1,12 @@
 # HANDOFF（最終更新: 2026-09-30）
 
 ## 現在地
-- main は e3efc54（PR #26 Home リデザインまでマージ済み）。作業ブランチ: `docs/claude-md-sync`（CLAUDE.md を実装に同期）
+- main は 86e2098（PR #27 まで）。作業中のブランチなし
 - リモート: `github.com/sakanafuto/7ofu-site`
 
 ## 直前に完了したこと
-- **CLAUDE.md を実装に同期**: 3 アプリ・`/api/like` Worker・`components/` `data/apps.ts` `i18n` `content/blog` を反映。
-  恒久的な注意点（sandbox・`--body-file`・ja/en 両方作る・スクショ手順）を HANDOFF から CLAUDE.md へ移管
+- **CLAUDE.md を実装に同期**（PR #27）: 3 アプリ・`/api/like` Worker・`components/` `data/apps.ts` `i18n` `content/blog` を反映。
+  恒久的な注意点を HANDOFF から CLAUDE.md へ移管。operating-model.md から退避済み agent 参照を削除
 - **Home リデザイン（ADR-0008）** PR #26 マージ済み。「観察ノート」モチーフ・`Spread.astro`・カメ・`apps.ts` 一元化
 - グローバル `~/.claude` の整理（skills 168→10・agents 38→5・CLAUDE.md 81→47 行）。理由と経緯は本 repo の外
 
