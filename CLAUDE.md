@@ -53,5 +53,5 @@ public/shots/         スクショ webp（<app>/<lang>-<name>.webp）
 - リモート `github.com/sakanafuto/7ofu-site`。main への直コミットは hook でブロック → docs 更新も branch → PR
 - Conventional Commits、本文は日本語。PR 本文は `--body-file` で渡す
 - ブランチ → `code-reviewer` レビュー（maker≠checker）→ `/verify` → PR 作成。**マージと deploy はユーザー**
-- gh / push は sandbox 内で TLS 検証に失敗する → sandbox 無効で実行
+- `gh` は sandbox 内で TLS 検証に失敗する → sandbox 無効で実行（`git push` は sandbox 内で通る）
 - 自律発火ループ（cron / /loop / /schedule / ultrareview / GitHub Actions）は使わない
