@@ -2,7 +2,7 @@
 
 tortoise_log / deeptap の運用モデルを Astro 静的サイト向けに移植したもの。
 **狙い**: 独立した機械的作業は素早く回しつつ、理解（comprehension）は厚いまま保つ。
-**自律発火ループは使わない**（2026/6 以降のプログラム実行課金を避ける）。
+**自律発火ループは使わない**（サブスクの週次枠を消費し、課金体系も変わりうるため。2026-09 時点でプログラム実行クレジット課金は保留中）。
 
 ## 体制: 対話オーケストレータ＋オンデマンド役割エージェント
 
@@ -11,9 +11,8 @@ tortoise_log / deeptap の運用モデルを Astro 静的サイト向けに移�
 | 役割 | エージェント / Skill | いつ |
 |---|---|---|
 | 実装 | オーケストレータ本体 | 既定 |
-| レビュー（maker≠checker） | `code-reviewer` + 必要に応じ `frontend-patterns` 等 | PR 前に必ず 1 回。skeptic 前提（壊れている前提で NG 探し） |
+| レビュー（maker≠checker） | `code-reviewer` | PR 前に必ず 1 回。skeptic 前提（壊れている前提で NG 探し） |
 | 探索 / 設計 | `Explore` / `Plan` | 広い探索・実装計画 |
-| ビルド修正 | `build-error-resolver` | astro build 失敗時のみ |
 
 ## フロー（1 Issue / 機能）
 
