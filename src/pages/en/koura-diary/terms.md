@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Terms of Use
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-07-25
+updated: 2026-10-04
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/terms) prevails.
@@ -34,15 +34,17 @@ These Terms apply to all relationships between the user and the developer concer
 1. The App may include an optional payment (tip) feature to support development.
 2. Payments are made through your app store, and refunds and the like follow the store's policies.
 
-## Article 6 (Posting Feature "Everyone's Turtles")
+## Article 6 (Posting Features "Everyone's Turtles" and "Today's Turtle")
 
 1. The App includes a posting feature ("Everyone's Turtles") that lets users publish turtle photos and information (name, species, and time since adoption) to other users within the App.
-2. Publication is subject to the developer's approval. The developer may approve or decline submissions, and may unpublish posted content, without disclosing reasons.
+2. For "Everyone's Turtles", first-time posts and other posts the developer decides to check are published after the developer's approval, and posts from users with an established posting history are published immediately and reviewed afterward. The developer may approve or decline submissions, and may unpublish posted content, without disclosing reasons.
 3. Users may post only photos they hold the rights to. By posting, the user grants the developer a royalty-free license to store, display, and distribute the posted content to the extent necessary for display in the App. Copyright in posted content remains with the user.
 4. Posting content that infringes the rights of others, content unrelated to turtles, or other content the developer deems inappropriate is prohibited. **The developer has zero tolerance for objectionable content and abusive users.** Where the developer judges content or conduct to fall under this clause, posts may be unpublished and the posting feature or the account itself may be suspended, without prior notice.
 5. Users may withdraw (delete) their own posts at any time.
 6. Inappropriate posts can be reported to the developer via the in-app report feature. The developer reviews reports and takes action such as unpublishing where necessary.
 7. Users can hide a particular poster's posts from their own screen (blocking). Blocking is not notified to the other party, and users can undo it themselves.
+8. The App also includes "Today's Turtle", a feature that lets users publish a turtle photo and information (name, species, and time since adoption) to other users **for 24 hours only, at most once per day**. Only photos that pass automatic screening (detection of inappropriate images and human faces) are published, and each post is hidden automatically after 24 hours. "Today's Turtle" posts are published based on the result of automatic screening, without prior approval by the developer. Automatic screening does not guarantee accuracy, and paragraph 4 and Article 7 apply to posts that pass it. Photos in which a human face is detected are not published (small faces and the like may not be detected). Paragraphs 3 through 7 also apply to "Today's Turtle", and the developer may unpublish posts without disclosing reasons.
+9. If a "Today's Turtle" post is reported, it is hidden immediately and the developer reviews it afterward. The developer may also suspend a user's ability to post to "Today's Turtle" without prior notice where the user is judged to be acting inappropriately. After a post is hidden, withdrawn, or expires, the photo file may remain on the server for up to a few days.
 
 ## Article 7 (Prohibited Conduct)
 
