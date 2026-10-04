@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Account & Data Deletion
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-07-26
+updated: 2026-10-04
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/account-deletion) prevails.
@@ -41,7 +41,7 @@ If you cannot operate the app (e.g. a lost device), request deletion via the con
 - **Your posts to the "Everyone's Turtles" posting feature** (posted photo, animal name, species,
   adoption date) and their files. This includes posts already approved and published; deleting
   your account deletes all of them
-- **Your "Today's Turtle" posts** (photo, animal name, species, adoption date) and their files. This includes posts currently shown; they are deleted when the account is deleted (photo files are removed within a few days)
+- **Your "Today's Turtle" posts** (photo, animal name, species, adoption date) and their files. This includes posts currently shown; they are deleted when the account is deleted (photo files are removed within up to a few days)
 - **Your blocked-poster information** ("Blocked users" list in Settings)
 - Your account (Firebase Authentication, Apple / Google link)
 
@@ -49,6 +49,7 @@ If you cannot operate the app (e.g. a lost device), request deletion via the con
 
 - **Crash diagnostics** are collected anonymously and are not linked to you or your account. By the Google Firebase Crashlytics default, they are automatically deleted after **up to 90 days**.
 - Files you **exported (backed up) yourself** remain on your device, under your control. Please delete them yourself if needed.
+- **Operational records of the posting features (Everyone's Turtles and Today's Turtle)**: the result of automatic photo screening (scores), records of reports (the reporter's user ID), and records of suspensions may be kept after account deletion to deal with abuse. These do not include the posted content itself, such as photos or animal names.
 - Except where retention is required by law, no personal data other than the above is retained by the developer.
 
 **Timing:** In-app deletion is **immediate**. Requests via the contact form are processed **promptly (typically within a few days)** after verifying your identity.
