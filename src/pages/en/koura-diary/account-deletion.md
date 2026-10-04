@@ -22,7 +22,7 @@ You can delete your data yourself at any time.
 This deletes your **account (Apple / Google link) and all of the data listed below**. This cannot be undone.
 
 - If you share records with a family (household), first **leave the household from "Settings → Family sharing"** before proceeding (a household's data belongs to its host).
-- To delete **only your data** while keeping your account, use **"Delete all data"** in the same place (this deletes animals, records, photos, and food items, and keeps the Apple / Google link). This option does not delete your "Everyone's Turtles" posts or blocked-user list; you can withdraw posts yourself from the posting feature at any time, and unblock users from Settings at any time.
+- To delete **only your data** while keeping your account, use **"Delete all data"** in the same place (this deletes animals, records, photos, and food items, and keeps the Apple / Google link). This option does not delete your "Everyone's Turtles" or "Today's Turtle" posts or your blocked-user list; you can withdraw posts yourself from the posting feature or the Home tab at any time, and unblock users from Settings at any time.
 
 ## Request deletion without the app
 
@@ -41,6 +41,7 @@ If you cannot operate the app (e.g. a lost device), request deletion via the con
 - **Your posts to the "Everyone's Turtles" posting feature** (posted photo, animal name, species,
   adoption date) and their files. This includes posts already approved and published; deleting
   your account deletes all of them
+- **Your "Today's Turtle" posts** (photo, animal name, species, adoption date) and their files. This includes posts currently shown; they are deleted when the account is deleted (photo files are removed within a few days)
 - **Your blocked-poster information** ("Blocked users" list in Settings)
 - Your account (Firebase Authentication, Apple / Google link)
 

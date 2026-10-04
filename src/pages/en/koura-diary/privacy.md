@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Privacy Policy
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-08-17
+updated: 2026-10-04
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/privacy) prevails.
@@ -42,12 +42,23 @@ When you post to "Everyone's Turtles" and the developer approves publication, **
 - Posted photos are stored and published after metadata such as location data (Exif) has been removed.
 - You can withdraw (delete) your posts at any time from within the App; withdrawing deletes the photo and information.
 - If you block a poster, that information (the other party's identifier and, for your own reference, the animal name from the post) is **stored as your own data** and is not visible to other users or to the person you blocked.
+- A caption attached to a post may be machine-translated into the viewer's language by Google Cloud Translation (the original text is also shown).
+- To decide on publication and to handle reports, the content of a post (photo, animal name, species, and caption) is also sent as a notification to the messaging service the developer uses for operations (Slack). Only the developer can see these notifications, and they are used solely for moderation.
+
+### Publication via "Today's Turtle" (one photo per day, 24 hours)
+
+- When you post to "Today's Turtle", **the photo and the animal's name, species, and time since adoption are visible to all users of the App for 24 hours.** You can post at most one photo per day, and the post is hidden automatically after 24 hours.
+- Before publication, the photo is **screened automatically** by Google Cloud Vision (detection of inappropriate images and human faces). Only photos that pass are published; photos that do not pass are never shown to anyone. The check is performed transiently on the photo, and no separate copy is stored for it.
+- If a published post is reported, it is hidden immediately and the developer is notified. Where necessary, the developer may suspend the user's access to "Today's Turtle".
+- You can withdraw a post at any time. After a post is hidden, withdrawn, or expires, the photo file may remain on the storage service for **up to a few days** (it is not visible during that time).
 
 ## 5. Provision to / Entrustment to Third Parties
 
 The App uses the following external services (Google LLC) for storage, authentication, and quality improvement, and the above information is transmitted to and stored by them. Each company's privacy policy applies, and data may be processed on servers outside your country.
 
 - Google Firebase (Firestore / Storage / Authentication / Crashlytics / App Check / Analytics)
+- Google Cloud Vision (automatic screening of "Today's Turtle" photos) and Google Cloud Translation (machine translation of captions)
+- Slack (Slack Technologies, LLC): notifications to the developer for publication decisions and handling of reports
 
 The App does not sell or provide user information to any other third party (except as required by law).
 

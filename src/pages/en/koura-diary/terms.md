@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Terms of Use
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-07-25
+updated: 2026-10-04
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/terms) prevails.
@@ -43,6 +43,8 @@ These Terms apply to all relationships between the user and the developer concer
 5. Users may withdraw (delete) their own posts at any time.
 6. Inappropriate posts can be reported to the developer via the in-app report feature. The developer reviews reports and takes action such as unpublishing where necessary.
 7. Users can hide a particular poster's posts from their own screen (blocking). Blocking is not notified to the other party, and users can undo it themselves.
+8. The App also includes "Today's Turtle", a feature that lets users publish a turtle photo and information (name, species, and time since adoption) to other users **for 24 hours only, at most once per day**. Only photos that pass automatic screening (detection of inappropriate images and human faces) are published, and each post is hidden automatically after 24 hours. The preceding paragraphs (other than paragraph 2) also apply to "Today's Turtle".
+9. If a "Today's Turtle" post is reported, the developer may hide it immediately, before review. The developer may also suspend a user's ability to post to "Today's Turtle" without prior notice where the user is judged to be acting inappropriately. After a post is hidden, withdrawn, or expires, the photo file may remain on the server for up to a few days.
 
 ## Article 7 (Prohibited Conduct)
 
