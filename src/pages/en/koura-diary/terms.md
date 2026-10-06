@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Terms of Use
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-10-04
+updated: 2026-10-06
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/terms) prevails.
@@ -43,8 +43,13 @@ These Terms apply to all relationships between the user and the developer concer
 5. Users may withdraw (delete) their own posts at any time.
 6. Inappropriate posts can be reported to the developer via the in-app report feature. The developer reviews reports and takes action such as unpublishing where necessary.
 7. Users can hide a particular poster's posts from their own screen (blocking). Blocking is not notified to the other party, and users can undo it themselves.
-8. The App also includes "Today's Turtle", a feature that lets users publish a turtle photo and information (name, species, and time since adoption) to other users **for 24 hours only, at most once per day**. Only photos that pass automatic screening (detection of inappropriate images and human faces) are published, and each post is hidden automatically after 24 hours. "Today's Turtle" posts are published based on the result of automatic screening, without prior approval by the developer. Automatic screening does not guarantee accuracy, and paragraph 4 and Article 7 apply to posts that pass it. Photos in which a human face is detected are not published (small faces and the like may not be detected). Paragraphs 3 through 7 also apply to "Today's Turtle", and the developer may unpublish posts without disclosing reasons.
+8. The App also includes "Today's Turtle", a feature that lets users publish a turtle photo and information (name, species, and time since adoption) to other users **for 24 hours only, at most once per day**. Only photos that pass automatic screening (detection of inappropriate images and human faces) are published, and each post is hidden automatically after 24 hours. Photos in "Today's Turtle" are published based on the result of automatic screening, without prior approval by the developer. Automatic screening does not guarantee accuracy, and paragraph 4 and Article 7 apply to posts that pass it. Photos in which a human face is detected are not published (small faces and the like may not be detected). Paragraphs 3 through 7 also apply to "Today's Turtle", and the developer may unpublish posts without disclosing reasons.
 9. If a "Today's Turtle" post is reported, it is hidden immediately and the developer reviews it afterward. The developer may also suspend a user's ability to post to "Today's Turtle" without prior notice where the user is judged to be acting inappropriately. After a post is hidden, withdrawn, or expires, the photo file may remain on the server for up to a few days.
+10. When posting to "Today's Turtle", you may add an optional caption (up to 40 characters, no line breaks).
+11. A caption is not shown to other users until the developer has reviewed and approved it. A caption that is not approved is not shown and only the photo is shown (photos are shown once they pass automatic screening, as before).
+12. Captions must not contain personal information, content that defames others, or content that violates law or public order and morals.
+13. Like the photo, a caption stops being shown 24 hours after posting. Withdrawing a post or deleting your account also deletes the caption.
+14. An approved caption may be machine-translated for users of other languages and shown together with the translation.
 
 ## Article 7 (Prohibited Conduct)
 
