@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Account & Data Deletion
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-10-04
+updated: 2026-10-08
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/account-deletion) prevails.
@@ -49,7 +49,7 @@ If you cannot operate the app (e.g. a lost device), request deletion via the con
 
 - **Crash diagnostics** are collected anonymously and are not linked to you or your account. By the Google Firebase Crashlytics default, they are automatically deleted after **up to 90 days**.
 - Files you **exported (backed up) yourself** remain on your device, under your control. Please delete them yourself if needed.
-- **Operational records of the posting features (Everyone's Turtles and Today's Turtle)**: the result of automatic photo screening (scores, linked to the poster's user ID), records of reports (the reporter's user ID), records of suspensions, and daily posting counts may be kept after account deletion to deal with abuse. No fixed retention period is set; they are kept for as long as needed to deal with abuse. These do not include the posted content itself, such as photos or animal names.
+- **Operational records of the posting features (Everyone's Turtles and Today's Turtle)**: the result of automatic photo screening (scores, linked to the poster's user ID), records of reports (the reporter's user ID), records of suspensions, daily posting counts, and the number of "Today's Turtle" captions approved and declined and the number of times posts were reported may be kept after account deletion to deal with abuse. No fixed retention period is set; they are kept for as long as needed to deal with abuse. These do not include the posted content itself, such as photos or animal names.
 - Except where retention is required by law, no personal data other than the above is retained by the developer.
 
 **Timing:** In-app deletion is **immediate**. Requests via the contact form are processed **promptly (typically within a few days)** after verifying your identity.

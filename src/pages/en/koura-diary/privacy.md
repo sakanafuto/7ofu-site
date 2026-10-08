@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Privacy Policy
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-10-06
+updated: 2026-10-08
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/privacy) prevails.
@@ -15,7 +15,7 @@ This policy describes how user information is handled in "Koura Diary" (the "App
 - **Records you enter**: Animal profiles (name, species, sex, adoption date, etc.), weight, carapace length, temperature/humidity, food, excretion, notes, photos, and so on. These are stored in a storage service (Google Firebase: Firestore / Storage).
 - **Account information**: The App starts with an anonymous account. To carry over data or share with family, you can link an Apple or Google account. Authentication is handled by Firebase Authentication, and the App uses the user's identifier (user ID) as the owner of records. Email addresses and the like provided by the sign-in provider (Apple / Google) are used for authentication; the App does not independently store or use them.
 - **Nickname (display name)**: To show whose record is whose in household (family) sharing, a nickname you optionally set is stored.
-- **Content posted to "Everyone's Turtles" and "Today's Turtle"**: The posted photo, the animal's name, species, and adoption date (used to display time since adoption), captions on "Everyone's Turtles" and "Today's Turtle", and the poster's user ID. We also keep, as operational records, the result of automatic photo screening (scores, linked to the poster's user ID), records of reports (the reporter's user ID), records of suspensions, and daily posting counts (used for rate limiting against abuse). See "4. Publication via the Posting Feature" for handling.
+- **Content posted to "Everyone's Turtles" and "Today's Turtle"**: The posted photo, the animal's name, species, and adoption date (used to display time since adoption), captions on "Everyone's Turtles" and "Today's Turtle", and the poster's user ID. We also keep, as operational records, the result of automatic photo screening (scores, linked to the poster's user ID), records of reports (the reporter's user ID), records of suspensions, daily posting counts (used for rate limiting against abuse), and the number of your "Today's Turtle" captions approved and declined and the number of times your posts were reported (linked to your user ID; used only to decide whether your captions can be shown without waiting for review, and may be kept after account deletion to deal with abuse). See "4. Publication via the Posting Feature" for handling.
 - **Error / diagnostic information (crash data)**: When the app terminates unexpectedly, information (location of occurrence, device model, OS version, etc.) is collected by Firebase Crashlytics. This is for quality improvement, not to identify individuals. It is not collected in development (debug) builds.
 - **Abuse prevention**: Firebase App Check verifies that access comes from a legitimate, untampered app. This confirms device legitimacy and is not personal information.
 
@@ -53,8 +53,8 @@ When your post to "Everyone's Turtles" is published (after the developer's appro
 - Before publication, the photo is **screened automatically** by Google Cloud Vision (detection of inappropriate images and human faces). Only photos that pass are published; photos that do not pass are never shown to anyone. No copy of the photo is made for screening. The screening result (scores) is kept as an operational record. Automatic screening does not guarantee accuracy. Photos in which a human face is detected are not published (small faces and the like may not be detected).
 - If a published post is reported, it is hidden immediately and the developer is notified (via Slack). Where necessary, the developer may suspend the user's access to "Today's Turtle".
 - You can withdraw a post at any time. After a post is hidden, withdrawn, not published, or expires, the photo file may remain on the storage service for **up to a few days** (it is not visible during that time).
-- **Caption (optional)**: A caption you add to your "Today's Turtle" post is not shown to other users until the developer reviews and approves it. For that review, we send only the caption text, the posting date, and an internal post number used for the approval action to the developer's notification tool (Slack). Your name, photo, and account information are not sent.
-- An approved caption is sent to Google Cloud Translation to be translated into other languages. It is not used for any other purpose.
+- **Caption (optional)**: Your first caption on "Today's Turtle" is not shown to other users until the developer reviews and approves it. Captions from users with an approval record are shown without waiting and reviewed by the developer afterwards. For that review, we send only the caption text, the posting date, and an internal post number used for the approval action to the developer's notification tool (Slack). Your name, photo, and account information are not sent.
+- A caption that is shown (including one shown without waiting for review) is sent to Google Cloud Translation to be translated into other languages. It is not used for any other purpose.
 - A caption is deleted automatically 24 hours after posting, and also when you withdraw the post, when the developer hides the post, or when you delete your account.
 
 ## 5. Provision to / Entrustment to Third Parties
