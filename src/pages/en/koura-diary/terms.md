@@ -47,10 +47,10 @@ These Terms apply to all relationships between the user and the developer concer
 9. If a "Today's Turtle" post is reported, it is hidden immediately and the developer reviews it afterward. The developer may also suspend a user's ability to post to "Today's Turtle" without prior notice where the user is judged to be acting inappropriately. After a post is hidden, withdrawn, or expires, the photo file may remain on the server for up to a few days.
 10. When posting to "Today's Turtle", or afterwards, you may add an optional caption (up to 40 characters, no line breaks).
 11. Your first caption is not shown to other users until the developer has reviewed and approved it. A caption that is not approved is not shown and only the photo is shown (photos are shown once they pass automatic screening, as before).
-12. If you have a caption the developer approved before, and none of your captions was declined and none of your posts was reported, your caption may be shown without waiting for review. The developer still reviews it after it is shown and removes it if it is inappropriate. Once a caption is removed, your captions are again shown only after review.
+12. If you have a caption the developer approved before, and none of your captions was declined and none of your posts was reported, your caption may be shown without waiting for review. The developer still reviews it after it is shown and removes it if it is inappropriate. Once a caption is removed, your captions are again shown only after review. In all other cases, a caption is not shown until the developer has reviewed and approved it.
 13. Captions must not contain personal information, content that defames others, or content that violates law or public order and morals.
 14. Like the photo, a caption stops being shown 24 hours after posting. Withdrawing a post or deleting your account also deletes the caption.
-15. An approved caption may be machine-translated for users of other languages and shown together with the translation.
+15. A caption that is shown (including one shown without waiting for review) may be machine-translated for users of other languages and shown together with the translation.
 
 ## Article 7 (Prohibited Conduct)
 
