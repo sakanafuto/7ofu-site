@@ -18,7 +18,7 @@ tortoise_log / deeptap の運用モデルを Astro 静的サイト向けに移�
 
 ```
 計画 → branch → 実装 → code-reviewer レビュー → /verify（astro build）→ PR 作成
-  → ユーザーがマージ → ユーザーが `npx wrangler deploy`（本番反映）
+  → ユーザーがマージ（Workers Builds が自動デプロイ = 本番反映）
 ```
 
 - 停止条件は決定的ゲート（/verify・Stop hook・pre-push）。モデルの自己判定に委ねない。
@@ -47,4 +47,4 @@ tortoise_log / deeptap の運用モデルを Astro 静的サイト向けに移�
 ## 人間が最後の砦
 
 レビューエージェントを入れても、最終確認・理解はユーザーの責務。
-本番デプロイ（`wrangler deploy`）・PR マージ・問い合わせフォームの実送信確認は人間が行う。
+PR マージ（= 本番デプロイ）・問い合わせフォームの実送信確認は人間が行う。

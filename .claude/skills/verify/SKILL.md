@@ -33,4 +33,4 @@ npm run build
 ## 注意
 
 - ビルド出力（`dist/`）・`.astro/` は gitignore 済み。コミット対象に含めない。
-- 本番反映はユーザーが `npx wrangler deploy` で実行する（/verify の範囲外）。
+- 本番反映は main へのマージで Workers Builds が自動で行う（/verify の範囲外）。

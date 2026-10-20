@@ -42,7 +42,7 @@ gh issue view <N> --json number,title,body,labels,state
 git push -u origin <branch>            # サンドボックスに弾かれたら無効で再実行
 gh pr create --fill                    # または --title/--body を明示
 ```
-- **マージ・本番反映（`npx wrangler deploy`）はユーザーが実行**。
+- **マージはユーザーが実行**。main へのマージで Workers Builds が自動デプロイする（マージ＝本番反映）。
 
 ### 8. 報告
 - 実装内容・対象 Issue 番号・主要コミット・PR URL を簡潔に。
