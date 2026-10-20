@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Privacy Policy
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-10-08
+updated: 2026-10-20
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/privacy) prevails.
@@ -15,7 +15,7 @@ This policy describes how user information is handled in "Koura Diary" (the "App
 - **Records you enter**: Animal profiles (name, species, sex, adoption date, etc.), weight, carapace length, temperature/humidity, food, excretion, notes, photos, and so on. These are stored in a storage service (Google Firebase: Firestore / Storage).
 - **Account information**: The App starts with an anonymous account. To carry over data or share with family, you can link an Apple or Google account. Authentication is handled by Firebase Authentication, and the App uses the user's identifier (user ID) as the owner of records. Email addresses and the like provided by the sign-in provider (Apple / Google) are used for authentication; the App does not independently store or use them.
 - **Nickname (display name)**: To show whose record is whose in household (family) sharing, a nickname you optionally set is stored.
-- **Content posted to "Everyone's Turtles" and "Today's Turtle"**: The posted photo, the animal's name, species, and adoption date (used to display time since adoption), captions on "Everyone's Turtles" and "Today's Turtle", and the poster's user ID. We also keep, as operational records, the result of automatic photo screening (scores, linked to the poster's user ID), records of reports (the reporter's user ID), records of suspensions, daily posting counts (used for rate limiting against abuse), and the number of your "Today's Turtle" captions approved and declined and the number of times your posts were reported (linked to your user ID; used only to decide whether your captions can be shown without waiting for review, and may be kept after account deletion to deal with abuse). See "4. Publication via the Posting Feature" for handling.
+- **Content posted to "Everyone's Turtles" and "Today's Turtle"**: The posted photo, the animal's name, species, and adoption date (used to display time since adoption), captions on "Everyone's Turtles" and "Today's Turtle", whether you allowed a "Today's Turtle" photo to be kept on the board, and the poster's user ID. We also keep, as operational records, the result of automatic photo screening (scores, linked to the poster's user ID), records of reports (the reporter's user ID), records of suspensions, daily posting counts (used for rate limiting against abuse), and the number of your "Today's Turtle" captions approved and declined and the number of times your posts were reported (linked to your user ID; used only to decide whether your captions can be shown without waiting for review, and may be kept after account deletion to deal with abuse). See "4. Publication via the Posting Feature" for handling.
 - **Error / diagnostic information (crash data)**: When the app terminates unexpectedly, information (location of occurrence, device model, OS version, etc.) is collected by Firebase Crashlytics. This is for quality improvement, not to identify individuals. It is not collected in development (debug) builds.
 - **Abuse prevention**: Firebase App Check verifies that access comes from a legitimate, untampered app. This confirms device legitimacy and is not personal information.
 
@@ -39,10 +39,10 @@ The App lets you create a "household" and share records with family. **When you 
 
 ## 4. Publication via the Posting Features "Everyone's Turtles" and "Today's Turtle"
 
-When your post to "Everyone's Turtles" is published (after the developer's approval for first-time posts and similar cases, or immediately for users with an established posting history), **the posted photo and the animal's name, species, and time since adoption become visible to all users of the App (including users who have not linked an account).** Please post with this scope of publication in mind.
+"Everyone's Turtles" shows photos chosen by the developer from "Today's Turtle" posts whose posters allowed them to be kept on the board (posts submitted directly from earlier versions of the App are published after the developer's approval for first-time posts and similar cases, or immediately for users with an established posting history). Once published, **the photo and the animal's name, species, and time since adoption (and the caption with its translations, if any) are visible to all users of the App (including users who have not linked an account) until you withdraw it.** Please post with this scope of publication in mind.
 
 - Posted photos are stored and published after metadata such as location data (Exif) has been removed.
-- You can withdraw (delete) your posts at any time from within the App; withdrawing deletes the photo and information.
+- You can withdraw (delete) your posts at any time from within the App; withdrawing deletes the photo and information. Photos kept on the board from "Today's Turtle" can also be withdrawn from "Your photos on the Turtle Board" on the board screen.
 - If you block a poster, that information (the other party's identifier and, for your own reference, the animal name from the post) is **stored as your own data** and is not visible to other users or to the person you blocked.
 - A caption attached to a post may be machine-translated into the viewer's language by Google Cloud Translation (the original text is also shown).
 - For "Everyone's Turtles", to decide on publication and to handle reports, the content of a post (photo, animal name, species, and caption) is also sent as a notification to the messaging service the developer uses for operations (Slack). Only the developer can see these notifications, and they are used solely for moderation.
@@ -50,12 +50,13 @@ When your post to "Everyone's Turtles" is published (after the developer's appro
 ### Publication via "Today's Turtle" (one photo per day, 24 hours)
 
 - When you post to "Today's Turtle", **the photo and the animal's name, species, and time since adoption are visible to all users of the App for 24 hours.** You can post at most one photo per day, and the post is hidden automatically after 24 hours.
+- If you turn on "Keep this photo on the Turtle Board" when posting (off by default), the developer may choose the photo and publish it on "Everyone's Turtles". A chosen photo is copied to storage for the board and **remains published after the 24 hours, until you withdraw it, delete your account, or the developer unpublishes it.** A photo posted with the switch off is never put on the board.
 - Before publication, the photo is **screened automatically** by Google Cloud Vision (detection of inappropriate images and human faces). Only photos that pass are published; photos that do not pass are never shown to anyone. No copy of the photo is made for screening. The screening result (scores) is kept as an operational record. Automatic screening does not guarantee accuracy. Photos in which a human face is detected are not published (small faces and the like may not be detected).
 - If a published post is reported, it is hidden immediately and the developer is notified (via Slack). Where necessary, the developer may suspend the user's access to "Today's Turtle".
 - You can withdraw a post at any time. After a post is hidden, withdrawn, not published, or expires, the photo file may remain on the storage service for **up to a few days** (it is not visible during that time).
 - **Caption (optional)**: Your first caption on "Today's Turtle" is not shown to other users until the developer reviews and approves it. Captions from users with an approval record are shown without waiting and reviewed by the developer afterwards. For that review, we send only the caption text, the posting date, and an internal post number used for the approval action to the developer's notification tool (Slack). Your name, photo, and account information are not sent.
 - A caption that is shown (including one shown without waiting for review) is sent to Google Cloud Translation to be translated into other languages. It is not used for any other purpose.
-- A caption is deleted automatically 24 hours after posting, and also when you withdraw the post, when the developer hides the post, or when you delete your account.
+- A caption is deleted automatically 24 hours after posting, and also when you withdraw the post, when the developer hides the post, or when you delete your account. However, the caption on a photo kept on the board (including its translations) remains until that photo is withdrawn or deleted.
 
 ## 5. Provision to / Entrustment to Third Parties
 
