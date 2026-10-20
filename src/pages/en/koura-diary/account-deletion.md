@@ -3,7 +3,7 @@ layout: ../../../layouts/DocLayout.astro
 title: Account & Data Deletion
 app: Koura Diary
 hub: /en/koura-diary/
-updated: 2026-10-08
+updated: 2026-10-20
 ---
 
 > This English text is provided for convenience. In case of any discrepancy, the [Japanese version](/koura-diary/account-deletion) prevails.
@@ -38,8 +38,8 @@ If you cannot operate the app (e.g. a lost device), request deletion via the con
 - Daily records (weight, carapace length, temperature / water temperature, humidity, meals, excretion, care, notes)
 - Photos (today's photo & shell photos) and their files
 - The food list
-- **Your posts to the "Everyone's Turtles" posting feature** (posted photo, animal name, species,
-  adoption date) and their files. This includes posts already approved and published; deleting
+- **Your posts on "Everyone's Turtles"** (posted photo, animal name, species,
+  adoption date, caption) and their files. This includes photos kept on the board from "Today's Turtle" and posts already published; deleting
   your account deletes all of them
 - **Your "Today's Turtle" posts** (photo, animal name, species, adoption date) and their files. This includes posts currently shown; they are deleted when the account is deleted (photo files are removed within a few days)
 - **Your blocked-poster information** ("Blocked users" list in Settings)
