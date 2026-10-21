@@ -24,7 +24,7 @@ gh issue view <N> --json number,title,body,labels,state
 ### 3. ブランチ → 実装
 - `git switch -c feat/<slug>` または `fix/<slug>`（ブランチ名に `main` を含めない）。
 - 実装。ページ追加は `src/pages/<app>/`、規約 `.md` は DocLayout + frontmatter（app/hub）。
-- 編集時 hook が働く（センチネル記録・prettier があれば整形）。
+- 編集時 hook がセンチネルに記録する。ターン終了前に `/verify` で build しないと Stop hook が差し戻す。
 
 ### 4. レビュー（maker≠checker）
 - `code-reviewer` エージェントに skeptic 前提でレビューさせる（docs/operating-model.md）。

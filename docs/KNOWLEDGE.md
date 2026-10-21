@@ -57,6 +57,9 @@
 - `git push` / `gh`（api.github.com）は**キーチェーン証明書検証がサンドボックスに弾かれる**
   （`x509: OSStatus -26276`）→ サンドボックス無効で再実行する。
 - `.githooks/` のスクリプトは git が直接実行するためサンドボックス制約を受けない。
+- Claude Code の hook もサンドボックス外で動く。hook からプロジェクト内のコード（`npm run build`・
+  `node_modules/.bin/*`）を実行したり、`python3` を `-I` なしで呼んだり（cwd の `json.py` を import する）、
+  `/tmp/claude` に書いたりしない（adr/0009）。
 - **シェルの cwd はターン間でリセットされうる**。カレント依存のコマンドは絶対パス基準で。
 
 ## Git 運用

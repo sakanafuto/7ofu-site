@@ -1,10 +1,11 @@
 #!/bin/bash
 # PreToolUse(Bash) hook: 危険コマンドをブロックする（exit 2 = ブロック、理由は stderr）。
-# JSON パースは python3。
+# JSON パースは python3。-I: hook はサンドボックス外で動くので、cwd（プロジェクト直下）に
+# 置かれた json.py 等を import させない（adr/0009）。
 set -u
 
 input=$(cat)
-cmd=$(printf '%s' "$input" | python3 -c 'import sys, json
+cmd=$(printf '%s' "$input" | python3 -I -c 'import sys, json
 try:
     sys.stdout.write((json.load(sys.stdin).get("tool_input") or {}).get("command") or "")
 except Exception:
