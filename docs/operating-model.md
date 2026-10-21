@@ -29,11 +29,13 @@ tortoise_log / deeptap の運用モデルを Astro 静的サイト向けに移�
 | ゲート | タイミング | 内容 |
 |---|---|---|
 | PreToolUse hook | Bash 実行前 | 危険コマンド遮断（force push / rm -rf / wrangler deploy） |
-| PostToolUse hook | Edit/Write 時 | `.astro`・`.md` 等の編集を記録（＋prettier があれば整形） |
-| Stop hook | ターン終了時 | `.astro`・`.md` を触ったターンのみ `npm run build` |
+| PostToolUse hook | Edit/Write 時 | build の入力（`src/`・`astro.config.mjs`）の編集を記録 |
+| Stop hook | ターン終了時 | 編集後に build が成功したか（`dist/index.html` が最終編集より新しいか）を判定。古ければ /verify を求めて差し戻す |
 | pre-commit | commit | gitleaks（シークレットスキャン） |
 | pre-push | push | `npm run build`（ビルド通過ゲート） |
 | /verify | push / 区切り前 | 上記ビルドを push せず先取り |
+
+- hook はサンドボックス外で動くので、プロジェクト内のコード（build・prettier 等）を実行しない（adr/0009）。
 
 - テストは持たない（コンテンツ静的サイト）。**ビルド通過**を主ゲートにする。
   リンク切れ・テンプレート崩れ・frontmatter 不備は astro build が検出する。
