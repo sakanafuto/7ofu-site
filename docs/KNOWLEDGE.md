@@ -42,8 +42,12 @@
 
 ## Cloudflare Workers（Static Assets）
 
-- `wrangler.jsonc` の `assets.directory = ./dist`。`npm run build` → `npx wrangler deploy` で本番反映。
-- **deploy は本番反映＝ユーザーが実行**。hook で `wrangler deploy` を遮断している。
+- `wrangler.jsonc` の `assets.directory = ./dist`。
+- **Workers Builds（GitHub 連携）で main への push が自動デプロイされる**（約 1 分。PR のチェック欄に
+  「Workers Builds: 7ofu-site」が出る）。つまりマージ＝本番反映。手で `npx wrangler deploy` すると
+  「No updated asset files to upload」になるのは、自動デプロイが先に済んでいるため（2026-10-20 に判明）
+- 手動 deploy はビルド失敗時などの非常用。hook で Claude からの実行は遮断している
+- 反映の確認は `curl -s https://7ofu.dev/<path>/` で改定日や文言を grep する（キャッシュ回避に `?v=乱数`）
 - 独自ドメイン `7ofu.dev` は Cloudflare Registrar。`astro.config.mjs` の `site` は sitemap 等の絶対 URL 用。
 
 ## Claude Code サンドボックス

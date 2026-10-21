@@ -5,7 +5,9 @@
 Cloudflare Workers（Static Assets）で配信し、ブログのいいね API（`/api/like`）だけ薄い Worker が処理する（adr/0006）。
 
 - 独自ドメイン `https://7ofu.dev`。`site` は `astro.config.mjs`
-- デプロイは `npx wrangler deploy` = 本番反映。**ユーザーが実行する**（hook でも遮断）
+- **main へのマージ = 本番反映**。Cloudflare Workers Builds が GitHub と連携し、main への push で自動ビルド・
+  デプロイする（約 1 分）。手での `npx wrangler deploy` は通常不要（hook で遮断）
+- だから PR のマージは本番に出す操作として扱う。Claude がマージするのはユーザーの明示指示があるときだけ
 
 ## 開発の進め方（ループエンジニアリング）
 
@@ -52,6 +54,7 @@ public/shots/         スクショ webp（<app>/<lang>-<name>.webp）
 
 - リモート `github.com/sakanafuto/7ofu-site`。main への直コミットは hook でブロック → docs 更新も branch → PR
 - Conventional Commits、本文は日本語。PR 本文は `--body-file` で渡す
-- ブランチ → `code-reviewer` レビュー（maker≠checker）→ `/verify` → PR 作成。**マージと deploy はユーザー**
+- ブランチ → `code-reviewer` レビュー（maker≠checker）→ `/verify` → PR 作成。**マージ（= 本番反映）はユーザー**。
+  HANDOFF だけを直す PR は Claude がマージしてよい（サイトの表示に影響しないため）
 - `gh` は sandbox 内で TLS 検証に失敗する → sandbox 無効で実行（`git push` は sandbox 内で通る）
 - 自律発火ループ（cron / /loop / /schedule / ultrareview / GitHub Actions）は使わない

@@ -1,19 +1,18 @@
-# HANDOFF（最終更新: 2026-09-30）
+# HANDOFF（最終更新: 2026-10-20）
 
 ## 現在地
-- main は 86e2098（PR #27 まで）。作業中のブランチなし
-- リモート: `github.com/sakanafuto/7ofu-site`
+- main は 0c7f500（PR #32 まで・本番反映済み）。作業ブランチ: `docs/workers-builds-auto-deploy`
+- リモート: `github.com/sakanafuto/7ofu-site`。**main へのマージ = 本番反映**（Workers Builds が自動デプロイ）
 
 ## 直前に完了したこと
-- **CLAUDE.md を実装に同期**（PR #27）: 3 アプリ・`/api/like` Worker・`components/` `data/apps.ts` `i18n` `content/blog` を反映。
-  恒久的な注意点を HANDOFF から CLAUDE.md へ移管。operating-model.md から退避済み agent 参照を削除
-- **Home リデザイン（ADR-0008）** PR #26 マージ済み。「観察ノート」モチーフ・`Spread.astro`・カメ・`apps.ts` 一元化
-- グローバル `~/.claude` の整理（skills 168→10・agents 38→5・CLAUDE.md 81→47 行）。理由と経緯は本 repo の外
+- **こうら日記の規約・ポリシー**: 今日のこうらのひとこと 第 1 版（PR #30）→ 第 2 版（#31）→ 掲示板の第 3 版（#32）。
+  ja/en の terms・privacy・account-deletion を 2026-10-20 版で公開済み（本番の文言を curl で確認）
+- Workers Builds による自動デプロイが判明し、CLAUDE.md・KNOWLEDGE・skills の deploy 手順を実態に合わせた
 
 ## 次のアクション
-- `npx wrangler deploy`（未実施なら）→ 実機で出現演出・カメ・フォント読込を確認
-- こうら日記 v1.13 配信後: プライバシーポリシーに「ひとことの機械翻訳」「運営の Slack への通知」を一文ずつ追加（ja/en）
+- 実機で Home の出現演出・カメ・フォント読込を確認（未確認のまま）
 - 残: Issue #1（Schemely 紹介文の追記）— apps.ts の features に反映する形で
+- 残: PR #23（ブログ記事「ジャクソン比とは」）が 7 月から open のまま
 
 ## ブロッカー・注意点
 - ヘッドレス Chrome（`--headless=new --virtual-time-budget=8000`）で出現演出込みの表示が撮れる。
