@@ -13,6 +13,7 @@
 | [0006](0006-like-counter-worker-kv.md) | ブログのいいねボタン（Cloudflare Worker + KV） | Accepted |
 | [0007](0007-ja-only-sections-lang-switch-fallback.md) | ja 専用セクションの言語スイッチャ・hreflang フォールバック | Accepted |
 | [0008](0008-home-redesign-field-notes.md) | Home のリデザイン（観察ノートモチーフ・Spread・カメ進捗） | Accepted |
+| [0009](0009-hooks-no-unsandboxed-project-code.md) | Claude Code の hook でプロジェクト内のコードを実行しない | Accepted |
 
 ## フォーマット
 

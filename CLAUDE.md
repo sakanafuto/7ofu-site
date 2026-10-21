@@ -46,7 +46,8 @@ public/shots/         スクショ webp（<app>/<lang>-<name>.webp）
 ## 品質ゲート（自動化）
 
 - hooks（`.claude/hooks/`）: 危険コマンド遮断（force push / rm -rf / `wrangler deploy`）／
-  ソース編集を記録し Stop 時に一度だけ `npm run build`（テストが無いので build が壊れ検出の要）
+  `src/`・`astro.config.mjs` の編集を記録し、Stop 時に編集後の build 成功（`dist/index.html` の更新）を判定。無ければ /verify を求めて差し戻す
+  （テストが無いので build が壊れ検出の要）。hook 自身は build しない（サンドボックス外で動くため・adr/0009）
 - pre-commit: gitleaks。pre-push: `npm run build`。有効化: `git config core.hooksPath .githooks`
 - CI は持たない（課金回避）
 
